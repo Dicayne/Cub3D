@@ -6,14 +6,14 @@
 #    By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/05 18:22:15 by vmoreau           #+#    #+#              #
-#    Updated: 2020/01/24 14:42:02 by vmoreau          ###   ########.fr        #
+#    Updated: 2020/01/27 04:40:02 by vmoreau          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #PRINTF
-NAME = libftprintf.a
+NAME = Cub3D
 
-SRCS = 
+SRCS = \
 			
 OBJS = $(SRCS:.c=.o)
 
@@ -32,38 +32,51 @@ LIB = Libft/
 
 OBJLIB = $(LIB)src/*.o
 
-LIBFT = $(LIB)libft.a
+#MINILIBX
+
+MLX = minilibx_mms_20191207_beta/
+
+OBJMLX = $(MLX)*.o
 
 #RULE
-all : complib $(NAME)
+all : complib compmlx $(NAME)
 
 $(OBJS) : %.o: %.c $(HEADER)
 	@$(CC) $(CFLAGS) -I $(INCL) -c $< -o $@ 
 
-$(NAME) : echoCL $(OBJS) echoCS echoAR
-	@ar rcs $@ $(OBJS) $(OBJLIB)
+$(NAME) : echoCL echoCS echoAR
+	@$(CC) -o $@ $(OBJS) $(OBJLIB) $(MLX)main.c -L ./ -lmlx
 
 complib :
-	@$(MAKE) $(CFLAGS) -C libft all
+	@$(MAKE) -C $(LIB) all
+
+compmlx :
+	@$(MAKE) -C $(MLX) all
 
 exec :
 	@$(CC) main.c $(LIBLINK)
 	@./a.out
 
 cleanlibft :
-	@$(MAKE) -C libft clean
+	@$(MAKE) -C $(LIB) clean
 
 fcleanlibft :
-	@$(MAKE) -C libft fclean
+	@$(MAKE) -C $(LIB) fclean
+
+cleanmlx :
+	@$(MAKE) -C $(MLX) clean
+
+fcleanmlx :
+	@$(MAKE) -C $(MLX) fclean
 	
-clean : echoCLEAN cleanlibft
+clean : echoCLEAN cleanlibft cleanmlx
 	@$(RM) $(OBJS)
 
-fclean : clean echoFCLEAN fcleanlibft
+fclean : clean echoFCLEAN fcleanlibft fcleanmlx
 	@$(RM) $(NAME)
 	@rm -rf a.out a.out.dSYM
 
-re : fclean all
+# re : fclean all
 
 #ECHO
 echoCL:
