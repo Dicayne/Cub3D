@@ -6,20 +6,21 @@
 #    By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/05 18:22:15 by vmoreau           #+#    #+#              #
-#    Updated: 2020/01/27 04:40:02 by vmoreau          ###   ########.fr        #
+#    Updated: 2020/02/07 18:48:00 by vmoreau          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #PRINTF
 NAME = Cub3D
 
-SRCS = \
-			
+SRCS =	src/main.c	src/init_struct.c	src/parsing.c	src/parsing_map.c	\
+		src/utils.c	\
+
 OBJS = $(SRCS:.c=.o)
 
 INCL = header/
 
-HEADER = $(INCL)ft_printf.h
+HEADER = $(INCL)cub3D.h
 
 CC = clang
 
@@ -44,18 +45,15 @@ all : complib compmlx $(NAME)
 $(OBJS) : %.o: %.c $(HEADER)
 	@$(CC) $(CFLAGS) -I $(INCL) -c $< -o $@ 
 
-$(NAME) : echoCL echoCS echoAR
-	@$(CC) -o $@ $(OBJS) $(OBJLIB) $(MLX)main.c -L ./ -lmlx
+$(NAME) : echoCL $(OBJS) echoCS
+	@$(CC) $(CFLAGS) -o $@ $(OBJS) $(OBJLIB) -L ./ -lmlx
+	#@$(CC) $(CFLAGS) -o $@ $(OBJS) $(OBJLIB) -g3 -fsanitize=address -L ./ -lmlx
 
 complib :
 	@$(MAKE) -C $(LIB) all
 
 compmlx :
 	@$(MAKE) -C $(MLX) all
-
-exec :
-	@$(CC) main.c $(LIBLINK)
-	@./a.out
 
 cleanlibft :
 	@$(MAKE) -C $(LIB) clean
@@ -76,18 +74,16 @@ fclean : clean echoFCLEAN fcleanlibft fcleanmlx
 	@$(RM) $(NAME)
 	@rm -rf a.out a.out.dSYM
 
-# re : fclean all
+re : fclean all
 
 #ECHO
 echoCL:
-	@echo "\033[33;33m===> Compiling Libftprintf\033[m"
+	@echo "\033[33;33m===> Compiling \033[31mCub3D"
 echoCS :
-	@echo "\033[1;32m===> Compilation Success\033[m"
+	@echo "\033[32m===> Compilation Success \033[31mCub3D Ready!!"
 echoCLEAN :
-	@echo "\033[35m===> Cleanning OBJ Libftprintf\033[m"
+	@echo "\033[35m===> Cleanning OBJ Cub3D"
 echoFCLEAN :
-	@echo "\033[35m===> Cleanning Libftprintf.a\033[m"
-echoAR :
-	@echo "\033[1;36m===> Archiving Libftprintf\033[m"
+	@echo "\033[35m===> Cleanning Exec"
 
 .PHONY : all clean fclean re complib exec cleanlibft fcleanlibft
