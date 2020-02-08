@@ -6,27 +6,27 @@
 #    By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/05 18:22:15 by vmoreau           #+#    #+#              #
-#    Updated: 2020/02/07 18:48:00 by vmoreau          ###   ########.fr        #
+#    Updated: 2020/02/08 20:29:04 by vmoreau          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-#PRINTF
-NAME = Cub3D
+NAME = cub3D
 
-SRCS =	src/main.c	src/init_struct.c	src/parsing.c	src/parsing_map.c	\
-		src/utils.c	\
+SRCS =	src/main.c				src/init_struct.c		$(PARS)parsing.c	\
+		$(PARS)parsing_map.c	$(PARS)utils_parsing.c	$(PARS)check_map.c	\
+		$(PARS)check_map2.c		src/print_map.c
 
 OBJS = $(SRCS:.c=.o)
 
 INCL = header/
+
+PARS = src/parsing/
 
 HEADER = $(INCL)cub3D.h
 
 CC = clang
 
 CFLAGS = -Werror -Wall -Wextra
-
-LIBLINK = -L./ -lftprintf
 
 #LIBFT
 LIB = Libft/

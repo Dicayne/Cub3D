@@ -6,124 +6,116 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 15:26:34 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/02/07 20:40:55 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/02/08 16:37:40 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/cub3d.h"
 
-static char	*clean_space(char **str)
+static int	pars_map3(char **split, t_map *map)
 {
-	int i;
-	int len;
-	char *ret;
-
-	i = 0;
-	len = strlen_c(*str, ' ');
-	ret = (char *)malloc(sizeof(char) * (len + 1));
-	if (ret == NULL)
-		return (NULL);
-	len = 0;
-	while ((*str)[i] != '\0')
-	{
-		if ((*str)[i] != ' ')
-		{
-			ret[len] = (*str)[i];
-			len++;
-		}
-		i++;
-	}
-	ret[len] = '\0';
-	return (ret);
-}
-
-static int	pars_map3(char **split, t_map *coor)
-{
-	int **map;
-	int x;
-	int y;
+	int		x;
+	int		y;
 
 	y = 0;
-	map = (int**)malloc(sizeof(int*) * coor->y);
-	if (map == NULL)
-			return (-1);
-	while (split[y] != NULL)
+	map->map = (int**)malloc(sizeof(int*) * map->y);
+	if (map->map == NULL)
+		return (-1);
+	while (y < map->y)
 	{
 		x = 0;
-		map[y] = (int*)malloc(sizeof(int) * coor->x);
-		if (map[y] == NULL)
+		map->map[y] = (int*)malloc(sizeof(int) * map->x);
+		if (map->map[y] == NULL)
 			return (-1);
 		while (split[y][x] != '\0')
 		{
-			map[y][x] = split[y][x] - 48;
+			map->map[y][x] = split[y][x] - 48;
 			x++;
 		}
-		if (x < coor->x)
-			fill_8(map, x, y, coor->x);
-		y++;
-	}
-	printf("\n");
-	y = 0;
-	while (y < coor->y)
-	{
-		x = 0;
-		while (x < coor->x)
-		{
-			printf("%d ",map[y][x]);
-			x++;
-		}
-		printf("\n");
+		if (x < map->x)
+			fill_8(map->map, x, y, map->x);
 		y++;
 	}
 	return (0);
 }
 
-static int	**pars_map2(char **split, t_map *map)
+static int	pars_map2(char **split, t_map *map)
 {
-	int x;
-	int y;
-	int i;
+	int		x;
+	int		y;
+	int		i;
+
 	i = 0;
 	x = 0;
+	y = 0;
 	while (split[i] != NULL)
 	{
 		split[i] = clean_space(&split[i]);
 		if (x < (int)ft_strlen(split[i]))
 			x = ft_strlen(split[i]);
+		if (split[i][0] == '\0')
+			y--;
 		i++;
 	}
-	y = i;
+	y += i;
 	map->x = x;
 	map->y = y;
 	pars_map3(split, map);
-	return (map->map);
+	return (0);
 }
 
-int		pars_map(t_map *mapp, int fd, char *str2)
+static int	check_line(char **str, int bool, char **join)
+{
+	int i;
+	int empty;
+
+	i = 0;
+	empty = 1;
+	while ((*str)[i] != '\0')
+	{
+		if ((*str)[i] != ' ' && (*str)[i] != 9)
+			empty = 0;
+		i++;
+	}
+	if (empty == 1 && bool == 0)
+		return (1);
+	else if (empty == 0 && bool == 1)
+	{
+		free(*join);
+		free(*str);
+		return (-1);
+	}
+	else if (empty == 1 && bool == 1)
+		return (1);
+	else
+		return (0);
+}
+
+int			pars_map(t_map *map, int fd, char *str2)
 {
 	char	*str;
 	int		ret;
-	int		ret2;
 	char	*join;
 	char	**split;
-	int		**map;
+	int		bool;
 
+	bool = 0;
 	str = NULL;
 	join = ft_strdup(str2);
 	ret = 1;
-	ret2 = 0;
 	while (ret > 0)
 	{
 		join = ft_strjoingnl(join, "@");
 		ret = get_next_line(fd, &str);
-		if (ret == -1)
-			break;
+		bool = check_line(&str, bool, &join);
+		if (ret == -1 || bool == -1)
+			return (-1);
 		join = ft_strjoingnl(join, str);
 		free(str);
 	}
 	split = ft_split(join, '@');
-	map = pars_map2(split, mapp);
-	free_split(split);
+	pars_map2(split, map);
 	free(join);
-	return (0);
+	free_split(split);
+	return (check_map(map));
 }
