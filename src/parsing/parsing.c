@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 12:10:14 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/02/08 18:28:18 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/02/12 16:27:06 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,19 +27,19 @@ void		free_split(char **split)
 
 static int	pars_texture(char **split, t_path *pars)
 {
-	if (ft_strcmp(split[0], "NO") == 0)
+	if (pars->pars_no == NULL && ft_strcmp(split[0], "NO") == 0)
 		pars->pars_no = ft_strdup(split[1]);
-	else if (ft_strcmp(split[0], "SO") == 0)
+	else if (pars->pars_so == NULL && ft_strcmp(split[0], "SO") == 0)
 		pars->pars_so = ft_strdup(split[1]);
-	else if (ft_strcmp(split[0], "WE") == 0)
+	else if (pars->pars_we == NULL && ft_strcmp(split[0], "WE") == 0)
 		pars->pars_we = ft_strdup(split[1]);
-	else if (ft_strcmp(split[0], "EA") == 0)
+	else if (pars->pars_ea == NULL && ft_strcmp(split[0], "EA") == 0)
 		pars->pars_ea = ft_strdup(split[1]);
-	else if (ft_strcmp(split[0], "S") == 0)
+	else if (pars->pars_s == NULL && ft_strcmp(split[0], "S") == 0)
 		pars->pars_s = ft_strdup(split[1]);
-	else if (ft_strcmp(split[0], "F") == 0)
+	else if (pars->pars_f == NULL && ft_strcmp(split[0], "F") == 0)
 		pars->pars_f = ft_strdup(split[1]);
-	else if (ft_strcmp(split[0], "C") == 0)
+	else if (pars->pars_c == NULL && ft_strcmp(split[0], "C") == 0)
 		pars->pars_c = ft_strdup(split[1]);
 	else
 		return (-1);
@@ -49,6 +49,24 @@ static int	pars_texture(char **split, t_path *pars)
 		return (1);
 }
 
+static int	check_reso(char **split, t_path *pars)
+{
+	if (pars->scrheight != 0 && pars->scrwidth != 0)
+		return (-1);
+	if (split[1] != NULL && split[2] != NULL && split[3] == NULL &&
+		strisnum(split[1]) == 1 && strisnum(split[2]) == 1)
+	{
+		pars->scrwidth = ft_atoi(split[1]);
+		pars->scrheight = ft_atoi(split[2]);
+		if (pars->scrheight > 0 && pars->scrwidth > 0)
+			return (1);
+		else
+			return (-1);
+	}
+	else
+		return (-1);
+}
+
 static int	pars_line(char **split, t_path *pars)
 {
 	int ret;
@@ -56,11 +74,7 @@ static int	pars_line(char **split, t_path *pars)
 	if (split[0] == '\0')
 		ret = 1;
 	else if (ft_strcmp(split[0], "R") == 0)
-	{
-		pars->scrwidth = ft_atoi(split[1]);
-		pars->scrheight = ft_atoi(split[2]);
-		ret = 1;
-	}
+		ret = check_reso(split, pars);
 	else if (ft_strcmp(split[0], "NO") == 0 || ft_strcmp(split[0], "SO") == 0 ||
 			ft_strcmp(split[0], "WE") == 0 || ft_strcmp(split[0], "EA") == 0 ||
 			ft_strcmp(split[0], "S") == 0 || ft_strcmp(split[0], "F") == 0 ||
@@ -99,14 +113,7 @@ int			parsing_fd(t_path *pars, t_map *map, char *fdm)
 		if (ret != 2)
 			free(str);
 	}
-	if (ret == -1)
-		pars->error = ft_strdup("Elements ERROR\n");
-	if (ret == 2)
-	{
-		ret = pars_map(map, fd, str);
-		if (ret == -1)
-			pars->error = ft_strdup("Map ERROR\n");
-		free(str);
-	}
+	ret == -1 ? pars->error = ft_strdup("Elements ERROR\n") : pars->error;
+	ret == 2 ? ret = pars_map(map, fd, str, pars) : ret;
 	return (ret);
 }

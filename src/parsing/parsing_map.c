@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 15:26:34 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/02/08 16:37:40 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/02/12 10:26:03 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static int	pars_map2(char **split, t_map *map)
 	return (0);
 }
 
-static int	check_line(char **str, int bool, char **join)
+static int	check_line(char **str, int bool, char **join, t_path *pars)
 {
 	int i;
 	int empty;
@@ -83,6 +83,7 @@ static int	check_line(char **str, int bool, char **join)
 	{
 		free(*join);
 		free(*str);
+		pars->error = ft_strdup("File ERROR\n");
 		return (-1);
 	}
 	else if (empty == 1 && bool == 1)
@@ -91,7 +92,15 @@ static int	check_line(char **str, int bool, char **join)
 		return (0);
 }
 
-int			pars_map(t_map *map, int fd, char *str2)
+static void	pars_map1bis(char **split, char *join, t_map *map)
+{
+	split = ft_split(join, '@');
+	pars_map2(split, map);
+	free(join);
+	free_split(split);
+}
+
+int			pars_map(t_map *map, int fd, char *str2, t_path *pars)
 {
 	char	*str;
 	int		ret;
@@ -99,23 +108,22 @@ int			pars_map(t_map *map, int fd, char *str2)
 	char	**split;
 	int		bool;
 
-	bool = 0;
 	str = NULL;
+	split = NULL;
 	join = ft_strdup(str2);
+	free(str2);
 	ret = 1;
+	bool = 0;
 	while (ret > 0)
 	{
 		join = ft_strjoingnl(join, "@");
 		ret = get_next_line(fd, &str);
-		bool = check_line(&str, bool, &join);
+		bool = check_line(&str, bool, &join, pars);
 		if (ret == -1 || bool == -1)
 			return (-1);
 		join = ft_strjoingnl(join, str);
 		free(str);
 	}
-	split = ft_split(join, '@');
-	pars_map2(split, map);
-	free(join);
-	free_split(split);
-	return (check_map(map));
+	pars_map1bis(split, join, map);
+	return (check_map(map, pars));
 }

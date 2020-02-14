@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/08 17:42:46 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/02/08 20:23:03 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/02/10 10:51:46 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ static void	fill_line_8xm0(t_map *map, int y, int x)
 		{
 			while (x > 0 && map->map[y][x] != 1)
 			{
+				if (map->map[y][x] == 5)
+					map->dir = 0;
 				map->map[y][x] = 8;
 				x--;
 			}
@@ -39,6 +41,8 @@ static void	fill_line_8x0(t_map *map, int y, int x)
 		{
 			while (x < map->x - 1 && map->map[y][x] != 1)
 			{
+				if (map->map[y][x] == 5)
+					map->dir = 0;
 				map->map[y][x] = 8;
 				x++;
 			}
@@ -56,14 +60,8 @@ static int	check_around2(t_map *map, int y, int x)
 
 	check_v1 = map->map[y][x - 1];
 	check_v2 = map->map[y - 1][x];
-	check_v3 = map->map[y - 1][x - 1];
-	check_v4 = map->map[y - 1][x + 1];
-	if (check_v1 == 8 || check_v2 == 8 || check_v3 == 8 || check_v4 == 8)
-		return (-1);
-	check_v1 = map->map[y][x + 1];
-	check_v2 = map->map[y + 1][x];
-	check_v3 = map->map[y + 1][x + 1];
-	check_v4 = map->map[y + 1][x - 1];
+	check_v3 = map->map[y][x + 1];
+	check_v4 = map->map[y + 1][x];
 	if (check_v1 == 8 || check_v2 == 8 || check_v3 == 8 || check_v4 == 8)
 		return (-1);
 	else

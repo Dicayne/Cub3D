@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 18:12:15 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/02/08 18:36:32 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/02/12 16:27:21 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,6 @@
 /*
 ** A DEGAGER
 */
-
-void	print(char **split)
-{
-	int i;
-
-	i = 0;
-	while (split[i] != NULL)
-	{
-		ft_putstr(split[i]);
-		ft_putchar('\n');
-		i++;
-	}
-	ft_putstr("fin");
-}
 
 void	print_int(t_map *coor)
 {
@@ -72,7 +58,7 @@ void	fill_8(int **map, int x, int y, int max)
 {
 	while (x < max)
 	{
-		map[y][x] = 8;
+		map[y][x] = 0;
 		x++;
 	}
 }
@@ -93,6 +79,21 @@ void	from_0_to_8(t_map *map, int y, int x)
 		}
 		y++;
 	}
+}
+
+int		strisnum(char *str)
+{
+	int i;
+
+	i = 0;
+	while (str[i] != '\0')
+	{
+		if (ft_isdigit(str[i]) == 1)
+			i++;
+		else
+			return (-1);
+	}
+	return (1);
 }
 
 char	*clean_space(char **str)

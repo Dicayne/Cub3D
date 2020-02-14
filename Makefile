@@ -6,21 +6,27 @@
 #    By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/05 18:22:15 by vmoreau           #+#    #+#              #
-#    Updated: 2020/02/08 20:29:04 by vmoreau          ###   ########.fr        #
+#    Updated: 2020/02/14 14:23:48 by vmoreau          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3D
 
-SRCS =	src/main.c				src/init_struct.c		$(PARS)parsing.c	\
-		$(PARS)parsing_map.c	$(PARS)utils_parsing.c	$(PARS)check_map.c	\
-		$(PARS)check_map2.c		src/print_map.c
+SRCS =	src/main.c	\
+		\
+		$(PARS)init_struct_pars.c	$(PARS)parsing.c	$(PARS)parsing_map.c \
+		$(PARS)utils_parsing.c		$(PARS)check_map.c	$(PARS)check_map2.c	 \
+		\
+		$(MAIN)init_struct_ray.c	$(MAIN)print_map.c	$(MAIN)cub3d.c		 \
+
 
 OBJS = $(SRCS:.c=.o)
 
 INCL = header/
 
 PARS = src/parsing/
+
+MAIN = src/main/
 
 HEADER = $(INCL)cub3D.h
 

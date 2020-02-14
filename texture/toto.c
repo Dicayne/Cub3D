@@ -1,20 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_map.c                                        :+:      :+:    :+:   */
+/*   toto.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/08 20:29:09 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/02/08 21:06:38 by vmoreau          ###   ########.fr       */
+/*   Created: 2020/02/04 17:16:18 by vmoreau           #+#    #+#             */
+/*   Updated: 2020/02/10 17:17:27 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/cub3d.h"
 
-void	print_map(t_map map, t_path pars, t_data *data)
-{
-	int x_size;
 	int y_size;
 	int x;
 	int y;
@@ -28,10 +25,10 @@ void	print_map(t_map map, t_path pars, t_data *data)
 	x = 0;
 	mx = 0;
 	my = 0;
-	while (x < SCRWIDTH)
+	while (x < pars.scrwidth)
 	{
 		y = 0;
-		while (y < SCRHEIGHT)
+		while (y < pars.scrheight)
 		{
 			mlx_pixel_put(data->mlx_ptr, data->mlx_win, x, y, 0xeedd82);
 			y++;
@@ -47,7 +44,7 @@ void	print_map(t_map map, t_path pars, t_data *data)
 		while (y < y_size * map.y)
 		{
 			tempy = y;
-			if (map.map[my][mx] == 1 || (my == map.pos_y && mx == map.pos_x))
+			if (map.map[my][mx] == 1 || (my == map.pos_y && mx == map.pos_x) || map.map[my][mx] == 2)
 			{
 				while (y < tempy + y_size)
 				{
@@ -55,11 +52,13 @@ void	print_map(t_map map, t_path pars, t_data *data)
 					while (x < tempx + x_size)
 					{
 						if (my == map.pos_y && mx == map.pos_x)
-						{ft_putstr("player\n");
+						{
 							mlx_pixel_put(data->mlx_ptr, data->mlx_win, x, y, 0xff0000);
 						}
-						else
-							mlx_pixel_put(data->mlx_ptr, data->mlx_win, x, y, 0x0);
+						else if (map.map[my][mx] == 1)
+							mlx_pixel_put(data->mlx_ptr, data->mlx_win, x, y, 0x8b4513);
+						else if (map.map[my][mx] == 2)
+							mlx_pixel_put(data->mlx_ptr, data->mlx_win, x, y, 0xff);
 						x++;
 					}
 					y++;
@@ -73,4 +72,3 @@ void	print_map(t_map map, t_path pars, t_data *data)
 		mx++;
 		x = tempx + x_size;
 	}
-}
