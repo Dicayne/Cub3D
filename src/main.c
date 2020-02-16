@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 17:16:18 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/02/11 13:27:31 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/02/15 14:11:46 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void display_parsing(t_path pars, t_map map)
 {
 	print_int(&map);
-	printf("pos_x:%d pos_y:%d dir:%c\n", map.pos_x, map.pos_y, map.dir);
+	printf("pos_x:%f pos_y:%f dir:%c\n", map.pos_x, map.pos_y, map.dir);
 	printf("Reso:%d %d\n\nTexture:\n", pars.scrwidth, pars.scrheight);
 	printf("no:%s\nso:%s\nea:%s\nwe:%s\ns:%s\nf:%s\nc:%s\n", pars.pars_no, pars.pars_so, pars.pars_ea, pars.pars_we, pars.pars_s, pars.pars_f, pars.pars_c);
 	printf("Parsing OK\n");

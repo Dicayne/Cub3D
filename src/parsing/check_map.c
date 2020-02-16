@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/08 11:43:08 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/02/11 13:31:11 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/02/15 14:20:57 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ static int	check_pos(t_map *map, int y, int x)
 			{
 				if (map->pos_x == -1 && map->pos_y == -1)
 				{
-					map->pos_y = y;
-					map->pos_x = x;
+					map->pos_y = y + 0.5;
+					map->pos_x = x + 0.5;
 					map->dir = map->map[y][x] + 48;
 					map->map[y][x] = 5;
 				}

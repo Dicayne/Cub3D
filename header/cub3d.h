@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 17:13:04 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/02/14 15:28:49 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/02/15 16:25:46 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ typedef struct	s_map
 	int		x;
 	int		y;
 	int		**map;
-	int		pos_x;
-	int		pos_y;
+	double	pos_x;
+	double	pos_y;
 	char	dir;
 }				t_map;
 typedef struct	s_path
@@ -55,9 +55,21 @@ typedef struct	s_path
 }				t_path;
 typedef struct	s_coor_vec
 {
-	double x;
-	double y;
+	double	x_f;
+	double	y_f;
+	int		x_i;
+	int		y_i;
 }				t_coor_vec;
+typedef struct	s_cast
+{
+	t_coor_vec dir;
+	t_coor_vec plane;
+	t_coor_vec ray_dir;
+	t_coor_vec side_dist;
+	t_coor_vec delta_dist;
+	t_coor_vec map;
+	t_coor_vec step;
+}				t_cast;
 /*
 ** PARSING
 */
@@ -74,13 +86,14 @@ int				check_closed_map(t_map *map, int y, int x);
 /*
 ** GAME
 */
-void			init_dir(t_map *map, t_coor_vec *dir);
-void			init_plane(t_coor_vec dir, t_coor_vec *plane);
+void			init_dir(t_map *map,t_cast *cast);
+void			init_plane(t_cast *cast);
 void			start(t_path pars, t_map *map, t_data *data);
 /*
 ** OTHER
 */
 void			init_struct(t_path *pars, t_map *map);
+void			init_camera(t_cast *cast, t_path pars, int x);
 void			affimage(t_data *data, int c1, int c2, int c3, int c4);
 void			free_struct(t_path *pars, t_map *map);
 void			print_map(t_map *map, t_path pars, t_data *data);
