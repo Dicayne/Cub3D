@@ -6,47 +6,28 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 11:18:11 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/02/15 14:12:56 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/02/18 14:46:30 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/cub3d.h"
 
-static void	init_world_color(t_data *data, t_path pars)
-{
-	int x;
-	int y;
-
-	x = 0;
-	y = 0;
-	while (x < pars.scrwidth)
-	{
-		y = 0;
-		while (y < pars.scrheight / 2)
-		{
-			mlx_pixel_put(data->mlx_ptr, data->mlx_win, x, y, 0xf5ff);
-			y++;
-		}
-		while (y < pars.scrheight)
-		{
-			mlx_pixel_put(data->mlx_ptr, data->mlx_win, x, y, 0xff00);
-			y++;
-		}
-		x++;
-	}
+void	init_img_struct(t_cub3d *cub)
+{	
+	cub->img.img = mlx_new_image(cub->map.mlx_ptr, cub->pars.scrwidth, cub->pars.scrheight);
+	cub->img.adr = mlx_get_data_addr(cub->img.img, &cub->img.bits_per_pixel,
+					 &cub->img.line_length,	&cub->img.endian);
 }
 
-void start(t_path pars, t_map *map, t_data *data)
+void		start(t_cub3d *cub)
 {
-	// (void)pars;
-	// (void)map;
-	// (void)data;
-	if ((data->mlx_ptr = mlx_init()) == NULL)
-		exit (EXIT_FAILURE);
-	if ((data->mlx_win = mlx_new_window(data->mlx_ptr, pars.scrwidth, pars.scrheight, "Cub3D")) == NULL)
-		exit (EXIT_FAILURE);
-	init_world_color(data, pars);
-	// mlx_key_hook(data->mlx_win, key_hook, data);
-	print_map(map, pars, data);
-	mlx_loop(data->mlx_ptr);
+	cub->bool = 1;
+	if ((cub->map.mlx_ptr = mlx_init()) == NULL)
+		exit(EXIT_FAILURE);
+	if ((cub->map.mlx_win = mlx_new_window(cub->map.mlx_ptr, cub->pars.scrwidth,
+			cub->pars.scrheight, "Cub3D")) == NULL)
+		exit(EXIT_FAILURE);
+	mlx_hook(cub->map.mlx_win,2, 1L<<0, key_hook, cub);
+	print_map(cub);
+	mlx_loop(cub->map.mlx_ptr);
 }

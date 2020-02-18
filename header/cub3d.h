@@ -6,18 +6,20 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 17:13:04 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/02/15 16:25:46 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/02/18 14:57:09 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
-# define FOV (66 * 3.14159265) / 180
+# define FOV 0.66
 # define ESC 53
 # define W 13
 # define S 1
 # define D 2
 # define A 0
+# define G 123
+# define DR 124
 # include <stdlib.h>
 # include <stdio.h>
 # include <string.h>
@@ -25,13 +27,10 @@
 # include "../minilibx_mms_20191207_beta/mlx.h"
 # include "../Libft/header/libft.h"
 
-typedef struct	s_data
+typedef struct	s_map
 {
 	void	*mlx_ptr;
 	void	*mlx_win;
-}				t_data;
-typedef struct	s_map
-{
 	int		x;
 	int		y;
 	int		**map;
@@ -70,6 +69,22 @@ typedef struct	s_cast
 	t_coor_vec map;
 	t_coor_vec step;
 }				t_cast;
+typedef struct	s_image
+{
+	void	*img;
+	char	*adr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}				t_image;
+typedef struct	s_cub3d
+{
+	t_map	map;
+	t_path	pars;
+	t_cast	cast;
+	t_image img;
+	int		bool;
+}				t_cub3d;
 /*
 ** PARSING
 */
@@ -86,19 +101,20 @@ int				check_closed_map(t_map *map, int y, int x);
 /*
 ** GAME
 */
-void			init_dir(t_map *map,t_cast *cast);
+void			init_dir(t_map map, t_cast *cast);
 void			init_plane(t_cast *cast);
-void			start(t_path pars, t_map *map, t_data *data);
+void			init_world_color(t_cub3d *cub, int *sky, int *floor);
+void			start(t_cub3d *cub);
+void			init_img_struct(t_cub3d *cub);
+void			my_mlx_pixel_put(t_image *img, int x, int y, int color);
+int				key_hook(int keycode, t_cub3d *cub);
 /*
 ** OTHER
 */
 void			init_struct(t_path *pars, t_map *map);
-void			init_camera(t_cast *cast, t_path pars, int x);
-void			affimage(t_data *data, int c1, int c2, int c3, int c4);
+void			init_camera(t_cast *cast, t_path pars,int x);
 void			free_struct(t_path *pars, t_map *map);
-void			print_map(t_map *map, t_path pars, t_data *data);
-//int 			key_hook(int keycode, t_data *param, t_map *map, t_path pars);
-//void			toto(t_map map, t_path pars, t_data *data);
+void			print_map(t_cub3d *cub);
 /*
 ** A DEGAGER
 */

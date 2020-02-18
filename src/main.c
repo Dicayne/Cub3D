@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 17:16:18 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/02/15 14:11:46 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/02/18 12:28:41 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,7 @@ void display_parsing(t_path pars, t_map map)
 
 int main(int ac, char **av)
 {
-	t_path	pars;
-	t_map	map;
-	t_data	data;
+	t_cub3d cub;
 
 	if (ac == 2 || ac == 3)
 	{
@@ -35,17 +33,17 @@ int main(int ac, char **av)
 			return (0);
 		}
 		else if (ac == 3)
-			pars.save = 1;
-		if (parsing_fd(&pars, &map, av[1]) == -1)
+			cub.pars.save = 1;
+		if (parsing_fd(&cub.pars, &cub.map, av[1]) == -1)
 		{
 			ft_putstr("ERROR\n");
-			ft_putstr(pars.error);
+			ft_putstr(cub.pars.error);
 		}
 		else
 		{
-			display_parsing(pars, map);
-			start(pars, &map, &data);
-			free_struct(&pars, &map);
+			display_parsing(cub.pars, cub.map);
+			start(&cub);
+			free_struct(&cub.pars, &cub.map);
 		}
 	}
 	else

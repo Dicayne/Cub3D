@@ -6,7 +6,7 @@
 #    By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/05 18:22:15 by vmoreau           #+#    #+#              #
-#    Updated: 2020/02/14 14:23:48 by vmoreau          ###   ########.fr        #
+#    Updated: 2020/02/18 18:49:26 by vmoreau          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ SRCS =	src/main.c	\
 		$(PARS)utils_parsing.c		$(PARS)check_map.c	$(PARS)check_map2.c	 \
 		\
 		$(MAIN)init_struct_ray.c	$(MAIN)print_map.c	$(MAIN)cub3d.c		 \
+		$(MAIN)init_world.c			$(MAIN)event.c		
 
 
 OBJS = $(SRCS:.c=.o)
@@ -52,8 +53,8 @@ $(OBJS) : %.o: %.c $(HEADER)
 	@$(CC) $(CFLAGS) -I $(INCL) -c $< -o $@ 
 
 $(NAME) : echoCL $(OBJS) echoCS
-	@$(CC) $(CFLAGS) -o $@ $(OBJS) $(OBJLIB) -L ./ -lmlx
-	#@$(CC) $(CFLAGS) -o $@ $(OBJS) $(OBJLIB) -g3 -fsanitize=address -L ./ -lmlx
+	@$(CC) $(CFLAGS) -O3 -o $@ $(OBJS) $(OBJLIB) -L ./ -lmlx
+	# @$(CC) $(CFLAGS) -o $@ $(OBJS) $(OBJLIB) -g3 -fsanitize=address -L ./ -lmlx
 
 complib :
 	@$(MAKE) -C $(LIB) all
