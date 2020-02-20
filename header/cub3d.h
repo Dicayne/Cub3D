@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 17:13:04 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/02/18 14:57:09 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/02/20 18:09:24 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,23 @@
 # define A 0
 # define G 123
 # define DR 124
+# define MS 0.09
+# define RS 0.03
 # include <stdlib.h>
 # include <stdio.h>
-# include <string.h>
 # include <math.h>
 # include "../minilibx_mms_20191207_beta/mlx.h"
 # include "../Libft/header/libft.h"
 
+typedef struct	s_move
+{
+	int w_on;
+	int s_on;
+	int a_on;
+	int d_on;
+	int g_on;
+	int dr_on;
+}				t_move;
 typedef struct	s_map
 {
 	void	*mlx_ptr;
@@ -58,6 +68,8 @@ typedef struct	s_coor_vec
 	double	y_f;
 	int		x_i;
 	int		y_i;
+	int		img_w;
+	int		img_h;
 }				t_coor_vec;
 typedef struct	s_cast
 {
@@ -77,12 +89,25 @@ typedef struct	s_image
 	int		line_length;
 	int		endian;
 }				t_image;
+typedef struct	s_tex
+{
+	void *text1;
+	t_coor_vec t1;
+	void *text2;
+	t_coor_vec t2;
+	void *text3;
+	t_coor_vec t3;
+	void *text4;
+	t_coor_vec t4;
+}				t_tex;
 typedef struct	s_cub3d
 {
 	t_map	map;
 	t_path	pars;
 	t_cast	cast;
 	t_image img;
+	t_tex	tex;
+	t_move	move;
 	int		bool;
 }				t_cub3d;
 /*
@@ -107,10 +132,21 @@ void			init_world_color(t_cub3d *cub, int *sky, int *floor);
 void			start(t_cub3d *cub);
 void			init_img_struct(t_cub3d *cub);
 void			my_mlx_pixel_put(t_image *img, int x, int y, int color);
+/*
+** EVENT
+*/
+void			refresh(t_cub3d *cub);
+void			event(t_cub3d *cub);
+void			check_key_on(t_cub3d *cub);
+void			init_move_ev(t_move	*move);
 int				key_hook(int keycode, t_cub3d *cub);
+void			move_w_s(t_cub3d *cub, int keycode);
+void			move_a_d(t_cub3d *cub, int keycode);
+void			rotate_g_dr(t_cub3d *cub, int keycode);
 /*
 ** OTHER
 */
+int				close_prog(t_cub3d *cub);
 void			init_struct(t_path *pars, t_map *map);
 void			init_camera(t_cast *cast, t_path pars,int x);
 void			free_struct(t_path *pars, t_map *map);

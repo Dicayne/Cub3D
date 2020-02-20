@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 14:05:43 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/02/18 16:32:35 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/02/20 15:46:09 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,17 +38,8 @@ void	init_dir(t_map map, t_cast *cast)
 
 void	init_plane(t_cast *cast)
 {
-	int bool_x;
-	int bool_y;
-
-	bool_x = 0;
-	bool_y = 0;
-	if (cast->dir.x_f != 0)
-		bool_y = 1;
-	else
-		bool_x = 1;
-	cast->plane.x_f = bool_x * tan(FOV / 2);
-	cast->plane.y_f = bool_y * tan(FOV / 2);
+	cast->plane.x_f = -cast->dir.y_f * tan(FOV / 2);
+	cast->plane.y_f = cast->dir.x_f * tan(FOV / 2);
 }
 
 void	init_camera(t_cast *cast, t_path pars, int x)

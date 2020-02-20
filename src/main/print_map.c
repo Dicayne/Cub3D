@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/08 20:29:09 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/02/18 18:47:31 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/02/20 17:29:28 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ static void	print_y(double wall_dist, int side, t_cub3d *cub, int x)
 		draw_end++;
 	}
 }
-
 
 static void	prep_ray_cast2(t_cast *cast, t_map map)
 {
