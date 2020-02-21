@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/08 20:29:09 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/02/20 17:29:28 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/02/21 19:06:41 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	my_mlx_pixel_put(t_image *img, int x, int y, int color)
 	char	*dst;
 
 	dst = img->adr + (y * img->line_length + x * (img->bits_per_pixel / 8));
-	*(unsigned int*)dst = color;
+	*(int*)dst = color;
 }
 
 static void	print_y(double wall_dist, int side, t_cub3d *cub, int x)
@@ -38,10 +38,12 @@ static void	print_y(double wall_dist, int side, t_cub3d *cub, int x)
 	draw_end = line_height / 2 + cub->pars.scrheight / 2;
 	if (draw_end >= cub->pars.scrheight)
 		draw_end = cub->pars.scrheight - 1;
+	//if (x == cub->pars.scrwidth / 2)
+	printf("x:%d   y:%d\n", cub->cast.pos_tex.x_i, cub->cast.pos_tex.y_i);
 	if (side == 1)
-		color = 0xff8a00;
+		color = mlx_get_color_value(cub->map.mlx_ptr, cub->tex.tex_no.iadr[cub->cast.pos_tex.x_i]);
 	else
-		color = 0xff0000;
+		color = mlx_get_color_value(cub->map.mlx_ptr, cub->tex.tex_so.iadr[cub->cast.pos_tex.y_i]);
 	init_world_color(cub, &color_sky, &color_floor);
 	while (y < draw_start)
 	{
@@ -104,6 +106,8 @@ static void	ray_throw(t_cast *cast, t_map map, int *side)
 {
 	int	hit;
 
+	cast->pos_tex.x_i = (int)(cast->side_dist.x_f * 100) % 10;
+	cast->pos_tex.y_i = (int)(cast->side_dist.y_f * 100) % 10;
 	hit = 0;
 	while (hit == 0)
 	{
@@ -122,6 +126,7 @@ static void	ray_throw(t_cast *cast, t_map map, int *side)
 		if (map.map[cast->map.y_i][cast->map.x_i] == 1)
 			hit = 1;
 	}
+	printf("x:%f   y:%f\n", cast->side_dist.x_f, cast->side_dist.y_f);
 }
 
 void		print_map(t_cub3d *cub)

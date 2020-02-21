@@ -6,7 +6,7 @@
 #    By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/05 18:22:15 by vmoreau           #+#    #+#              #
-#    Updated: 2020/02/20 15:22:33 by vmoreau          ###   ########.fr        #
+#    Updated: 2020/02/21 16:14:35 by vmoreau          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ SRCS =	src/main.c															 \
 		$(EVENT)rotate_g_dr.c		$(EVENT)refresh.c	$(EVENT)event.c		 \
 		\
 		$(MAIN)init_struct_ray.c	$(MAIN)print_map.c	$(MAIN)cub3d.c		 \
-		$(MAIN)init_world.c			
+		$(MAIN)init_world.c			$(MAIN)set_images.c	
 
 
 OBJS = $(SRCS:.c=.o)
@@ -58,7 +58,7 @@ $(OBJS) : %.o: %.c $(HEADER)
 	@$(CC) $(CFLAGS) -I $(INCL) -c $< -o $@ 
 
 $(NAME) : echoCL $(OBJS) echoCS
-	@$(CC) $(CFLAGS) -O3 -o $@ $(OBJS) $(OBJLIB) -L ./ -lmlx
+	@$(CC) $(CFLAGS) -O3 -flto -march=native -o $@ $(OBJS) $(OBJLIB) -L ./ -lmlx
 	# @$(CC) $(CFLAGS) -o $@ $(OBJS) $(OBJLIB) -g3 -fsanitize=address -L ./ -lmlx
 
 complib :

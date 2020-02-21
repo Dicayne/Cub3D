@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/20 15:21:39 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/02/20 17:41:50 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/02/21 13:41:30 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,4 +20,10 @@ void	init_move_ev(t_move	*move)
 	move->d_on = 0;
 	move->g_on = 0;
 	move->dr_on = 0;
+}
+
+void	init_speed(t_speed *spe)
+{
+	spe->mov_spe = 0;
+	spe->rot_spe = 0;
 }

@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/20 15:00:34 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/02/20 17:49:01 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/02/21 13:48:41 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,12 @@ void		check_key_on(t_cub3d *cub)
 		rotate_g_dr(cub, G);
 	if (cub->move.dr_on == 1)
 		rotate_g_dr(cub, DR);
-	refresh(cub);
 }
 
-void		refresh(t_cub3d *cub)
+int			refresh(t_cub3d *cub)
 {
+	check_key_on(cub);
 	mlx_clear_window(cub->map.mlx_ptr, cub->map.mlx_win);
 	print_map(cub);
+	return (0);
 }

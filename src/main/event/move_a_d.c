@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 12:04:21 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/02/20 17:22:56 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/02/21 13:45:06 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,39 +14,45 @@
 
 static void	move_d(t_cub3d *cub)
 {
-	if (cub->map.map[(int)(cub->map.pos_y + (cub->cast.plane.y_f * MS))]
-					[(int)(cub->map.pos_x + (cub->cast.plane.x_f * MS))] == 0)
+	double spd;
+
+	spd = MS + cub->spe.mov_spe;
+	if (cub->map.map[(int)(cub->map.pos_y + (cub->cast.plane.y_f * spd))]
+					[(int)(cub->map.pos_x + (cub->cast.plane.x_f * spd))] == 0)
 	{
-		cub->map.pos_y += cub->cast.plane.y_f * MS;
-		cub->map.pos_x += cub->cast.plane.x_f * MS;
+		cub->map.pos_y += cub->cast.plane.y_f * spd;
+		cub->map.pos_x += cub->cast.plane.x_f * spd;
 	}
 	else
 	{
-		if (cub->map.map[(int)(cub->map.pos_y + (cub->cast.plane.y_f * MS))]
+		if (cub->map.map[(int)(cub->map.pos_y + (cub->cast.plane.y_f * spd))]
 					[(int)cub->map.pos_x] == 0)
-			cub->map.pos_y += cub->cast.plane.y_f * MS;
+			cub->map.pos_y += cub->cast.plane.y_f * spd;
 		if (cub->map.map[(int)cub->map.pos_y]
-					[(int)(cub->map.pos_x + (cub->cast.plane.x_f * MS))] == 0)
-			cub->map.pos_x += cub->cast.plane.x_f * MS;
+					[(int)(cub->map.pos_x + (cub->cast.plane.x_f * spd))] == 0)
+			cub->map.pos_x += cub->cast.plane.x_f * spd;
 	}
 }
 
 static void	move_a(t_cub3d *cub)
 {
-	if (cub->map.map[(int)(cub->map.pos_y - (cub->cast.plane.y_f * MS))]
-					[(int)(cub->map.pos_x - (cub->cast.plane.x_f * MS))] == 0)
+	double spd;
+
+	spd = MS + cub->spe.mov_spe;
+	if (cub->map.map[(int)(cub->map.pos_y - (cub->cast.plane.y_f * spd))]
+					[(int)(cub->map.pos_x - (cub->cast.plane.x_f * spd))] == 0)
 	{
-		cub->map.pos_y -= cub->cast.plane.y_f * MS;
-		cub->map.pos_x -= cub->cast.plane.x_f * MS;
+		cub->map.pos_y -= cub->cast.plane.y_f * spd;
+		cub->map.pos_x -= cub->cast.plane.x_f * spd;
 	}
 	else
 	{
-		if (cub->map.map[(int)(cub->map.pos_y - (cub->cast.plane.y_f * MS))]
+		if (cub->map.map[(int)(cub->map.pos_y - (cub->cast.plane.y_f * spd))]
 					[(int)cub->map.pos_x] == 0)
-			cub->map.pos_y -= cub->cast.plane.y_f * MS;
+			cub->map.pos_y -= cub->cast.plane.y_f * spd;
 		if (cub->map.map[(int)cub->map.pos_y]
-					[(int)(cub->map.pos_x - (cub->cast.plane.x_f * MS))] == 0)
-			cub->map.pos_x -= cub->cast.plane.x_f * MS;
+					[(int)(cub->map.pos_x - (cub->cast.plane.x_f * spd))] == 0)
+			cub->map.pos_x -= cub->cast.plane.x_f * spd;
 	}
 }
 
