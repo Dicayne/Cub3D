@@ -6,13 +6,13 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 17:13:04 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/02/21 16:48:42 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/03/02 13:44:03 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
-# define FOV 0.66
+# define FOV 0.99
 # define ESC 53
 # define W 13
 # define S 1
@@ -27,6 +27,19 @@
 # include <math.h>
 # include "../minilibx_mms_20191207_beta/mlx.h"
 # include "../Libft/header/libft.h"
+
+typedef struct	s_print
+{
+	int line_height;
+	int draw_start;
+	int draw_end;
+	int color;
+	int y;
+	int start;
+	int color_sky;
+	int color_floor;
+	double wall_dist;
+}				t_print;
 
 typedef struct	s_speed
 {
@@ -84,12 +97,14 @@ typedef struct	s_cast
 	t_coor_vec map;
 	t_coor_vec step;
 	t_coor_vec pos_tex;
+	double		wall_dist;
 }				t_cast;
 typedef struct	s_image
 {
 	void	*img;
 	char	*adr;
 	int		*iadr;
+	int		**tiadr;
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
@@ -136,10 +151,13 @@ void			init_world_color(t_cub3d *cub, int *sky, int *floor);
 void			start(t_cub3d *cub);
 void			init_img_struct(t_cub3d *cub);
 void			my_mlx_pixel_put(t_image *img, int x, int y, int color);
+void			put_mini_map(t_cub3d *cub);
+void			display(t_cub3d *cub);
 /*
 ** IMAGES
 */
 void			set_images(t_cub3d *cub);
+void			print_img(double wall_dist, int side, t_cub3d *cub, int x);
 /*
 ** EVENT
 */

@@ -6,7 +6,7 @@
 #    By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/05 18:22:15 by vmoreau           #+#    #+#              #
-#    Updated: 2020/02/21 16:14:35 by vmoreau          ###   ########.fr        #
+#    Updated: 2020/02/28 14:02:19 by vmoreau          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,10 @@ SRCS =	src/main.c															 \
 		$(EVENT)rotate_g_dr.c		$(EVENT)refresh.c	$(EVENT)event.c		 \
 		\
 		$(MAIN)init_struct_ray.c	$(MAIN)print_map.c	$(MAIN)cub3d.c		 \
-		$(MAIN)init_world.c			$(MAIN)set_images.c	
+		$(MAIN)init_world.c			$(MAIN)set_images.c	$(MAIN)display.c	 \
+		$(MAIN)put_mini_map.c		$(MAIN)print_img.c
+
+
 
 
 OBJS = $(SRCS:.c=.o)
@@ -55,7 +58,7 @@ OBJMLX = $(MLX)*.o
 all : complib compmlx $(NAME)
 
 $(OBJS) : %.o: %.c $(HEADER)
-	@$(CC) $(CFLAGS) -I $(INCL) -c $< -o $@ 
+	@$(CC) $(CFLAGS) -I $(INCL) -c $< -o $@
 
 $(NAME) : echoCL $(OBJS) echoCS
 	@$(CC) $(CFLAGS) -O3 -flto -march=native -o $@ $(OBJS) $(OBJLIB) -L ./ -lmlx
@@ -78,7 +81,7 @@ cleanmlx :
 
 fcleanmlx :
 	@$(MAKE) -C $(MLX) fclean
-	
+
 clean : echoCLEAN cleanlibft cleanmlx
 	@$(RM) $(OBJS)
 

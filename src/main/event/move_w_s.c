@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 11:55:43 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/02/21 13:44:55 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/02/28 11:22:52 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ static void	move_w(t_cub3d *cub)
 	double spd;
 
 	spd = MS + cub->spe.mov_spe;
+	//printf("%f    %f\n", cub->map.pos_y + (cub->cast.dir.y_f * spd), cub->map.pos_x + (cub->cast.dir.x_f * spd));
 	if (cub->map.map[(int)(cub->map.pos_y + (cub->cast.dir.y_f * spd))]
 					[(int)(cub->map.pos_x + (cub->cast.dir.x_f * spd))] == 0)
 	{
