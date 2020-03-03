@@ -1,4 +1,4 @@
-R 1200 840
+R 1000 820
 NO ./texture/resized/wood_wall1.xpm
 SO ./texture/resized/wood_wall2.xpm
 WE ./texture/pics/colorstone.xpm

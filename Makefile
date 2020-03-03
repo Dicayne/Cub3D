@@ -6,7 +6,7 @@
 #    By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/05 18:22:15 by vmoreau           #+#    #+#              #
-#    Updated: 2020/02/28 14:02:19 by vmoreau          ###   ########.fr        #
+#    Updated: 2020/03/03 13:27:27 by vmoreau          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,7 @@ CFLAGS = -Werror -Wall -Wextra
 #LIBFT
 LIB = Libft/
 
-OBJLIB = $(LIB)src/*.o
+OBJLIB = $(LIB)src/*/*.o
 
 #MINILIBX
 

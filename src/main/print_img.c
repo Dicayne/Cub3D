@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 14:01:58 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/03/02 14:19:04 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/03/03 11:10:26 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,6 @@ static void	print_img2(double wall_dist, int side, t_cub3d *cub, int x)
 	print.draw_end = print.line_height / 2 + cub->pars.scrheight / 2;
 	if (print.draw_end >= cub->pars.scrheight)
 		print.draw_end = cub->pars.scrheight - 1;
-	if (print.line_height > cub->pars.scrheight)
-		print.line_height = cub->pars.scrheight;
 	print.y = 0;
 	init_world_color(cub, &print.color_sky, &print.color_floor);
 	print_img3(&print, cub, side, x);

@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 12:10:14 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/02/12 16:27:06 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/03/03 13:27:02 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ int			parsing_fd(t_path *pars, t_map *map, char *fdm)
 
 	str = NULL;
 	ret = 1;
-	init_struct(pars, map);
+	init_struct_pars(pars, map);
 	fd = open(fdm, O_RDONLY);
 	while (ret == 1)
 	{

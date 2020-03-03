@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 17:13:09 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/02/07 11:43:04 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/03/03 12:32:22 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <stdio.h>
 # include <unistd.h>
 # include "get_next_line.h"
-
+# include "ft_printf.h"
 /*
 **STRUCTURE
 */

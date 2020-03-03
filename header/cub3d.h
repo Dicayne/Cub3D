@@ -6,13 +6,13 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 17:13:04 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/03/02 13:44:03 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/03/03 13:32:26 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
-# define FOV 0.99
+# define FOV 0.66
 # define ESC 53
 # define W 13
 # define S 1
@@ -20,8 +20,8 @@
 # define A 0
 # define G 123
 # define DR 124
-# define MS 0.09
-# define RS 0.035
+# define MS 0.25
+# define RS 0.080
 # include <stdlib.h>
 # include <stdio.h>
 # include <math.h>
@@ -142,6 +142,7 @@ char			*clean_space(char **str);
 int				strisnum(char *str);
 int				check_map(t_map *map, t_path *pars);
 int				check_closed_map(t_map *map, int y, int x);
+void			init_struct_pars(t_path *pars, t_map *map);
 /*
 ** GAME
 */
@@ -174,7 +175,6 @@ void			rotate_g_dr(t_cub3d *cub, int keycode);
 ** OTHER
 */
 int				close_prog(t_cub3d *cub);
-void			init_struct(t_path *pars, t_map *map);
 void			init_camera(t_cast *cast, t_path pars,int x);
 void			free_struct(t_path *pars, t_map *map);
 void			print_map(t_cub3d *cub);

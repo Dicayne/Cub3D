@@ -6,29 +6,63 @@
 #    By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/05 15:18:39 by vmoreau           #+#    #+#              #
-#    Updated: 2020/02/07 19:10:57 by vmoreau          ###   ########.fr        #
+#    Updated: 2020/03/03 13:17:40 by vmoreau          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
 
-SRCS = 	src/ft_atoi.c			src/ft_isalnum.c	src/ft_isalpha.c	\
-		src/ft_isascii.c		src/ft_isdigit.c	src/ft_isprint.c	\
-		src/ft_strchr.c			src/ft_strlcpy.c	src/ft_strlen.c		\
-		src/ft_strncmp.c		src/ft_strrchr.c	src/ft_tolower.c	\
-		src/ft_toupper.c		src/ft_strlcat.c	src/ft_strnstr.c	\
-		src/ft_memset.c			src/ft_bzero.c		src/ft_memcpy.c		\
-		src/ft_memccpy.c		src/ft_memcmp.c		src/ft_memchr.c		\
-		src/ft_memmove.c		src/ft_strdup.c		src/ft_calloc.c		\
-		src/ft_substr.c			src/ft_strjoin.c	src/ft_itoa.c		\
-		src/ft_strmapi.c		src/ft_split.c		src/ft_strtrim.c	\
-		src/ft_putchar_fd.c		src/ft_putstr_fd.c	src/ft_putendl_fd.c	\
-		src/ft_putnbr_fd.c		src/ft_lstlast.c	src/ft_lstnew.c		\
-		src/ft_lstclear.c		src/ft_lstiter.c	src/ft_lstmap.c		\
-		src/ft_lstsize.c		src/ft_lstdelone.c	src/ft_strcmp.c		\
-		src/ft_lstadd_front.c	src/ft_lstadd_back.c					\
-		src/get_next_line.c		src/get_next_line_utils.c				\
-		src/ft_putchar.c		src/ft_putstr.c		src/ft_putnbr.c		\
+#####################################PATH######################################
+MEM = src/memory/
+CHAR = src/char/
+STR = src/string/
+OP = src/output/
+CONV = src/conversion/
+LST = src/list/
+GNL = src/gnl/
+PTF = src/printf/
+####################################SOURCES####################################
+
+#----------------CHAR----------------#
+SRCS += $(CHAR)ft_isascii.c		$(CHAR)ft_isdigit.c $(CHAR)ft_isprint.c	\
+		$(CHAR)ft_isalnum.c		$(CHAR)ft_isalpha.c $(CHAR)ft_tolower.c	\
+		$(CHAR)ft_toupper.c
+
+#---------------STRING---------------#
+SRCS += $(STR)ft_strlcat.c		$(STR)ft_strncmp.c	$(STR)ft_strcmp.c	\
+		$(STR)ft_strchr.c		$(STR)ft_strlcpy.c	$(STR)ft_strlen.c	\
+		$(STR)ft_strrchr.c		$(STR)ft_strnstr.c	$(STR)ft_strdup.c	\
+		$(STR)ft_substr.c		$(STR)ft_strjoin.c	$(STR)ft_strtrim.c	\
+		$(STR)ft_strmapi.c		$(STR)ft_split.c
+
+#---------------OUTPUT---------------#
+SRCS += $(OP)ft_putchar_fd.c	$(OP)ft_putstr_fd.c	$(OP)ft_putendl_fd.c \
+		$(OP)ft_putnbr_fd.c		$(OP)ft_putnbr.c	$(OP)ft_putchar.c	\
+		$(OP)ft_putstr.c
+
+#-------------CONVERSION-------------#
+SRCS += $(CONV)ft_atoi.c		$(CONV)ft_itoa.c
+
+#---------------MEMORY---------------#
+SRCS +=	$(MEM)ft_memset.c		$(MEM)ft_bzero.c	$(MEM)ft_memcpy.c	\
+		$(MEM)ft_memccpy.c		$(MEM)ft_memcmp.c	$(MEM)ft_memchr.c	\
+		$(MEM)ft_memmove.c		$(MEM)ft_calloc.c
+
+#----------------LIST----------------#
+SRCS += $(LST)ft_lstadd_back.c	$(LST)ft_lstmap.c	$(LST)ft_lstclear.c	\
+		$(LST)ft_lstdelone.c	$(LST)ft_lstiter.c	$(LST)ft_lstsize.c	\
+		$(LST)ft_lstadd_front.c	$(LST)ft_lstlast.c	$(LST)ft_lstnew.c
+
+#------------GET NEXT LINE-----------#
+SRCS += $(GNL)get_next_line.c	$(GNL)get_next_line_utils.c
+
+#---------------PRINTF---------------#
+SRCS +=	$(PTF)ft_printf.c		$(PTF)check_flags.c	$(PTF)find_size.c	\
+		$(PTF)init_struct.c		$(PTF)itoas.c		$(PTF)print_s.c		\
+		$(PTF)print_u.c			$(PTF)print_c.c		$(PTF)print_x.c		\
+		$(PTF)print_p.c			$(PTF)print_di.c	$(PTF)print_0.c		\
+		$(PTF)check_di.c		$(PTF)check_s.c		$(PTF)check_cper.c	\
+		$(PTF)check_uxp.c		$(PTF)check_di_d.c	$(PTF)set_ret.c
 
 CFLAGS = -Wall -Wextra -Werror
 

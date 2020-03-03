@@ -6,13 +6,13 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 18:13:20 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/02/14 14:04:50 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/03/03 13:26:00 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/cub3d.h"
 
-void		init_struct(t_path *pars, t_map *map)
+void		init_struct_pars(t_path *pars, t_map *map)
 {
 	pars->scrheight = 0;
 	pars->scrwidth = 0;
