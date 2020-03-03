@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/20 15:11:29 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/02/21 13:58:02 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/03/03 15:58:46 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ static void	rotate_g(t_cub3d *cub)
 	ang = -RS - cub->spe.rot_spe;
 	old_dirx = cub->cast.dir.x_f;
 	old_planex = cub->cast.plane.x_f;
-
 	cub->cast.dir.x_f =
 			cub->cast.dir.x_f * cos(ang) - cub->cast.dir.y_f * sin(ang);
 	cub->cast.dir.y_f =

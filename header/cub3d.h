@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 17:13:04 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/03/03 13:32:26 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/03/03 19:45:12 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # define A 0
 # define G 123
 # define DR 124
-# define MS 0.25
+# define MS 0.2
 # define RS 0.080
 # include <stdlib.h>
 # include <stdio.h>
@@ -30,15 +30,15 @@
 
 typedef struct	s_print
 {
-	int line_height;
-	int draw_start;
-	int draw_end;
-	int color;
-	int y;
-	int start;
-	int color_sky;
-	int color_floor;
-	double wall_dist;
+	int		line_height;
+	int		draw_start;
+	int		draw_end;
+	int		color;
+	int		y;
+	int		start;
+	int		color_sky;
+	int		color_floor;
+	double	wall_dist;
 }				t_print;
 
 typedef struct	s_speed
@@ -89,14 +89,14 @@ typedef struct	s_coor_vec
 }				t_coor_vec;
 typedef struct	s_cast
 {
-	t_coor_vec dir;
-	t_coor_vec plane;
-	t_coor_vec ray_dir;
-	t_coor_vec side_dist;
-	t_coor_vec delta_dist;
-	t_coor_vec map;
-	t_coor_vec step;
-	t_coor_vec pos_tex;
+	t_coor_vec	dir;
+	t_coor_vec	plane;
+	t_coor_vec	ray_dir;
+	t_coor_vec	side_dist;
+	t_coor_vec	delta_dist;
+	t_coor_vec	map;
+	t_coor_vec	step;
+	t_coor_vec	pos_tex;
 	double		wall_dist;
 }				t_cast;
 typedef struct	s_image
@@ -110,6 +110,7 @@ typedef struct	s_image
 	int		endian;
 	int		img_h;
 	int		img_w;
+	double	dist;
 }				t_image;
 typedef struct	s_tex
 {
@@ -117,6 +118,7 @@ typedef struct	s_tex
 	t_image tex_so;
 	t_image tex_ea;
 	t_image tex_we;
+	t_image tex_s;
 }				t_tex;
 typedef struct	s_cub3d
 {
@@ -175,7 +177,7 @@ void			rotate_g_dr(t_cub3d *cub, int keycode);
 ** OTHER
 */
 int				close_prog(t_cub3d *cub);
-void			init_camera(t_cast *cast, t_path pars,int x);
+void			init_camera(t_cast *cast, t_path pars, int x);
 void			free_struct(t_path *pars, t_map *map);
 void			print_map(t_cub3d *cub);
 /*

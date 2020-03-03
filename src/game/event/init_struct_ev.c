@@ -6,13 +6,13 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/20 15:21:39 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/02/21 13:41:30 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/03/03 15:55:22 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../header/cub3d.h"
 
-void	init_move_ev(t_move	*move)
+void	init_move_ev(t_move *move)
 {
 	move->w_on = 0;
 	move->s_on = 0;

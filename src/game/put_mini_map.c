@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 17:30:22 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/02/27 13:59:02 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/03/03 17:53:02 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,13 @@ static void		init_img_mmap(t_cub3d *cub, t_image *m_map)
 	m_map->img_w = cub->pars.scrwidth / 5;
 	m_map->img = mlx_new_image(cub->map.mlx_ptr, m_map->img_w, m_map->img_h);
 	m_map->adr = mlx_get_data_addr(m_map->img, &m_map->bits_per_pixel,
-					 &m_map->line_length,	&m_map->endian);
+					&m_map->line_length, &m_map->endian);
 }
 
 static void		print_pos(t_cub3d *cub, t_image *m_map)
 {
 	int x;
 	int y;
-
 
 	x = ((int)(cub->map.pos_x * 100) * m_map->img_w) / (cub->map.x * 100);
 	y = ((int)(cub->map.pos_y * 100) * m_map->img_h) / (cub->map.y * 100);
@@ -82,5 +81,6 @@ void			put_mini_map(t_cub3d *cub)
 
 	init_img_mmap(cub, &m_map);
 	base_m_map(cub, &m_map);
-	mlx_put_image_to_window(cub->map.mlx_ptr, cub->map.mlx_win, m_map.img, 0, 0);
+	mlx_put_image_to_window(cub->map.mlx_ptr, cub->map.mlx_win,
+														m_map.img, 0, 0);
 }
