@@ -6,11 +6,11 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 17:30:22 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/03/03 17:53:02 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/03/04 11:10:59 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../header/cub3d.h"
+#include "../../../header/cub3d.h"
 
 static void		init_img_mmap(t_cub3d *cub, t_image *m_map)
 {

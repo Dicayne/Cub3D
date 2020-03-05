@@ -6,7 +6,7 @@
 #    By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/05 18:22:15 by vmoreau           #+#    #+#              #
-#    Updated: 2020/03/03 16:54:48 by vmoreau          ###   ########.fr        #
+#    Updated: 2020/03/05 19:53:11 by vmoreau          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,17 +39,23 @@ SRCS +=	$(PARS)init_struct_pars.c	$(PARS)parsing.c	$(PARS)parsing_map.c \
 SRCS +=	$(EVENT)init_struct_ev.c	$(EVENT)move_w_s.c	$(EVENT)move_a_d.c	 \
 		$(EVENT)rotate_g_dr.c		$(EVENT)refresh.c	$(EVENT)event.c
 
-#-----------------Game-----------------#
-SRCS +=	$(GAME)init_struct_ray.c	$(GAME)print_map.c	$(GAME)cub3d.c		 \
-		$(GAME)init_world.c			$(GAME)set_images.c	$(GAME)display.c	 \
-		$(GAME)put_mini_map.c		$(GAME)print_img.c
+#---------------Display----------------#
+SRCS +=	$(DISP)init_world.c			$(DISP)print_img.c	$(DISP)display.c	 \
+		$(DISP)put_mini_map.c		$(DISP)set_images.c	
 
+#---------------Save_BMP---------------#
+SRCS += $(SAVE)save_bmp.c
+
+#---------------Ray_cast---------------#
+SRCS +=	$(RAY)init_struct_ray.c		$(RAY)ray_cast.c	$(RAY)cub3d.c
 
 #####################################PARTH#####################################
 
-PARS = src/parsing/
-GAME = src/game/
-EVENT = src/game/event/
+PARS	= src/parsing/
+DISP	= src/game/display/
+EVENT	= src/game/event/
+RAY		= src/game/ray_cast/
+SAVE	= src/game/bmp_save/
 
 #####################################BASIC#####################################
 
@@ -127,6 +133,9 @@ cleanmlx :
 
 fcleanmlx :
 	$(MAKE) -C $(MLX) fclean
+
+cleancub : echoCLEAN
+	$(RM) $(OBJS)
 
 clean : echoCLEAN cleanlibft cleanmlx
 	$(RM) $(OBJS)

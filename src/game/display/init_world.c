@@ -6,11 +6,11 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 13:14:25 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/02/18 13:39:55 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/03/05 12:30:54 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../header/cub3d.h"
+#include "../../../header/cub3d.h"
 
 static int	get_color2(int r, int g, int b)
 {
@@ -46,7 +46,7 @@ static int	get_color(char *str_color)
 	free_split(split);
 	if (bool == 1)
 	{
-		ft_putstr("ERROR\nRGB ERROR\n");
+		ft_printf("%sError\n%sRGB ERROR\n", RED, YELLOW);
 		exit(EXIT_FAILURE);
 	}
 	return (get_color2(r, g, b));

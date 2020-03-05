@@ -6,12 +6,12 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 14:01:58 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/03/03 19:59:58 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/03/04 18:49:30 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../header/cub3d.h"
-
+#include "../../../header/cub3d.h"
+int bool = 0;
 static int	find_pos_y(t_print *print, t_cub3d *cub, t_image *tex)
 {
 	int		y;
@@ -32,8 +32,8 @@ static void	find_color(int side, t_print *print, t_cub3d *cub)
 {
 	if (side == 3)
 		print->color = mlx_get_color_value(cub->map.mlx_ptr,
-				cub->tex.tex_no.tiadr[find_pos_y(print, cub, &cub->tex.tex_no)]
-					[(cub->cast.pos_tex.y_i * cub->tex.tex_no.img_w) / 1000]);
+			cub->tex.tex_no.tiadr[find_pos_y(print, cub, &cub->tex.tex_no)]
+				[(cub->cast.pos_tex.y_i * cub->tex.tex_no.img_w) / 1000]);
 	else if (side == 1)
 		print->color = mlx_get_color_value(cub->map.mlx_ptr,
 				cub->tex.tex_so.tiadr[find_pos_y(print, cub, &cub->tex.tex_so)]

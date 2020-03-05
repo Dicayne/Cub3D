@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 18:12:15 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/02/12 16:27:21 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/03/04 18:20:41 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	from_0_to_8(t_map *map, int y, int x)
 		x = 0;
 		while (x < map->x)
 		{
-			if (map->map[y][x] == 0)
+			if (map->map[y][x] == 0 || map->map[y][x] == 2)
 			{
 				if (y == 0 || y == map->y - 1 || x == map->x - 1 || x == 0)
 					map->map[y][x] = 8;

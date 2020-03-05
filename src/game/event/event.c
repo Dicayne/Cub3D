@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 14:45:57 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/02/21 17:51:23 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/03/05 19:32:36 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int			close_prog(t_cub3d *cub)
 {
+	ft_printf("%sSee you soon %s:'( %s...\n", CYAN, YELLOW, NC);
 	mlx_clear_window(cub->map.mlx_ptr, cub->map.mlx_win);
 	mlx_destroy_window(cub->map.mlx_ptr, cub->map.mlx_win);
 	exit(EXIT_SUCCESS);
@@ -67,6 +68,8 @@ int			key_hook(int keycode, t_cub3d *cub)
 		cub->spe.mov_spe -= 0.01;
 	if (keycode == 126 && cub->spe.mov_spe + MS < 0.5)
 		cub->spe.mov_spe += 0.01;
+	if (keycode == 3)
+		save(cub);
 	return (0);
 }
 

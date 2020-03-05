@@ -6,13 +6,13 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 16:14:19 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/03/03 20:01:07 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/03/05 20:00:57 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../header/cub3d.h"
+#include "../../../header/cub3d.h"
 
-static int	tab_text(t_image *img)
+int	tab_text(t_image *img)
 {
 	int i;
 	int j;
@@ -53,7 +53,8 @@ static int	get_img_info(t_image *img, void *mlx_ptr, char *path_tex)
 	}
 	else
 	{
-		ft_printf("ERROR\nTexture Error\n");
+		ft_printf("%sError\n", RED);
+		ft_printf("%sTexture Error ==> %s%s%s\n", YELLOW, CYAN, path_tex);
 		return (-1);
 	}
 }

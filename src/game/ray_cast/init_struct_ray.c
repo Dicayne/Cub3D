@@ -6,11 +6,11 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 14:05:43 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/02/21 13:41:15 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/03/04 11:08:25 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../header/cub3d.h"
+#include "../../../header/cub3d.h"
 
 void	init_dir(t_map map, t_cast *cast)
 {

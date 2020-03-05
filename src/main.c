@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 17:16:18 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/03/03 16:58:49 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/03/05 12:32:30 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,20 +31,20 @@ int		main(int ac, char **av)
 	{
 		if (ac == 3 && ft_strcmp(av[2], "--save") != 0)
 		{
-			ft_putstr("ERROR\nArguments ERROR\n");
+			ft_printf("%sError\n%sArguments ERROR\n", RED, YELLOW);
 			return (0);
 		}
 		else if (ac == 3)
 			cub.pars.save = 1;
 		if (parsing_fd(&cub.pars, &cub.map, av[1]) == -1)
-			ft_printf("ERROR\n%s", cub.pars.error);
+			ft_printf("%sError\n%s%s", RED, YELLOW, cub.pars.error);
 		else
 		{
-			display_parsing(cub.pars, cub.map);
+			//display_parsing(cub.pars, cub.map);
 			start(&cub);
 		}
 	}
 	else
-		ft_putstr("ERROR\nArguments ERROR\n");
+		ft_printf("%sError\n%sArguments ERROR\n", RED, YELLOW);
 	return (0);
 }
