@@ -1,4 +1,4 @@
-R 820 600
+R 920 600
 NO ./texture/wall_texture/wood_wall.xpm
 SO ./texture/wall_texture/wood_wall2.xpm
 WE ./texture/wall_texture/dalles.xpm

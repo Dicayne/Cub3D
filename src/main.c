@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 17:16:18 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/03/05 12:32:30 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/03/06 23:49:32 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int		main(int ac, char **av)
 {
 	t_cub3d cub;
 
+	cub.pars.save = 0;
 	if (ac == 2 || ac == 3)
 	{
 		if (ac == 3 && ft_strcmp(av[2], "--save") != 0)
