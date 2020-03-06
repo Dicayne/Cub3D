@@ -6,7 +6,7 @@
 #    By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/05 18:22:15 by vmoreau           #+#    #+#              #
-#    Updated: 2020/03/05 19:53:11 by vmoreau          ###   ########.fr        #
+#    Updated: 2020/03/06 13:57:19 by vmoreau          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -112,8 +112,8 @@ $(OBJS) : %.o: %.c $(HEADER)
 	printf "$(CYAN).$(NC)"
 
 $(NAME) : echoCL $(OBJS) echoOK echoCS
-	# $(CC) $(CFLAGS) -O3 -flto -march=native -o $@ $(OBJS) $(OBJLIB) -L ./ -lmlx
-	$(CC) $(CFLAGS) -o $@ $(OBJS) $(OBJLIB) -g3 -fsanitize=address -L ./ -lmlx
+	$(CC) -O3 $(CFLAGS) -flto -march=native -o $@ $(OBJS) $(OBJLIB) -L ./ -lmlx
+	# $(CC) $(CFLAGS) -o $@ $(OBJS) $(OBJLIB) -g3 -fsanitize=address -L ./ -lmlx
 
 
 complib :

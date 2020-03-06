@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 11:18:11 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/03/05 20:03:07 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/03/06 15:02:51 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,11 @@ void	start(t_cub3d *cub)
 		exit(EXIT_FAILURE);
 	if (cub->pars.save == 0)
 	{
-		if ((cub->map.mlx_win = mlx_new_window(cub->map.mlx_ptr, cub->pars.scrwidth,
-				cub->pars.scrheight, "Cub3D")) == NULL)
+		if ((cub->map.mlx_win = mlx_new_window(cub->map.mlx_ptr,
+					cub->pars.scrwidth, cub->pars.scrheight, "Cub3D")) == NULL)
 			exit(EXIT_FAILURE);
 		set_images(cub);
+		init_img_struct(cub);
 		event(cub);
 		mlx_loop(cub->map.mlx_ptr);
 	}
@@ -42,6 +43,7 @@ void	start(t_cub3d *cub)
 	{
 		cub->map.mlx_win = NULL;
 		set_images(cub);
+		init_img_struct(cub);
 		ray_cast(cub);
 	}
 }

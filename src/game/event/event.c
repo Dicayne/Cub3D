@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 14:45:57 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/03/05 19:32:36 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/03/06 16:23:51 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,10 @@ int			key_push(int keycode, t_move *move)
 		move->g_on = 1;
 	if (keycode == DR)
 		move->dr_on = 1;
+	if (keycode == 17 && move->dm == 0)
+		move->dm = 1;
+	else if (keycode == 17 && move->dm == 1)
+		move->dm = 0;
 	return (0);
 }
 
@@ -68,7 +72,7 @@ int			key_hook(int keycode, t_cub3d *cub)
 		cub->spe.mov_spe -= 0.01;
 	if (keycode == 126 && cub->spe.mov_spe + MS < 0.5)
 		cub->spe.mov_spe += 0.01;
-	if (keycode == 3)
+	if (keycode == F)
 		save(cub);
 	return (0);
 }

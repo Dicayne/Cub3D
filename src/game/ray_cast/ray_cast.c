@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/08 20:29:09 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/03/05 12:24:40 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/03/06 16:14:12 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,35 +54,38 @@ static void	prep_ray_cast(t_cast *cast, t_path pars, int x, t_map map)
 
 static int	check_side(double x)
 {
-		if (x > 0)
-			return (0);
-		else
-			return (2);
+	if (x > 0)
+		return (0);
+	else
+		return (2);
 }
+
 static void	ray_throw(t_cast *cast, t_map map, int *side)
 {
 	int	hit;
-	int sp_bool;
 
 	hit = 0;
-	sp_bool = 0;
 	while (hit == 0)
 	{
 		if (cast->side_dist.x_f < cast->side_dist.y_f)
 		{
 			cast->side_dist.x_f += cast->delta_dist.x_f;
 			cast->map.x_i += cast->step.x_i;
-			*side = 0 + check_side(cast->ray_dir.x_f);
+			*side = 0;
 		}
 		else
 		{
 			cast->side_dist.y_f += cast->delta_dist.y_f;
 			cast->map.y_i += cast->step.y_i;
-			*side = 1 + check_side(cast->ray_dir.y_f);
+			*side = 1;
 		}
 		if (map.map[cast->map.y_i][cast->map.x_i] == 1)
 			hit = 1;
 	}
+	if (*side == 1)
+		*side += check_side(cast->ray_dir.y_f);
+	else
+		*side += check_side(cast->ray_dir.x_f);
 }
 
 void		ray_cast(t_cub3d *cub)
@@ -90,12 +93,10 @@ void		ray_cast(t_cub3d *cub)
 	int			x;
 	int			side;
 
-	init_img_struct(cub);
-	if (cub->bool == 1)
-	{
-		init_dir(cub->map, &cub->cast);
-		init_plane(&cub->cast);
-	}
+	check_dir_plane(cub);
+	if (cub->bool == 0)
+		mlx_put_image_to_window(cub->map.mlx_ptr, cub->map.mlx_win,
+						cub->img.img, 0, 0);
 	x = 0;
 	while (x < cub->pars.scrwidth)
 	{

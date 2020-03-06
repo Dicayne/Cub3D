@@ -6,11 +6,20 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 14:05:43 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/03/04 11:08:25 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/03/06 15:08:27 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../header/cub3d.h"
+
+void	check_dir_plane(t_cub3d *cub)
+{
+	if (cub->bool == 1)
+	{
+		init_dir(cub->map, &cub->cast);
+		init_plane(&cub->cast);
+	}
+}
 
 void	init_dir(t_map map, t_cast *cast)
 {

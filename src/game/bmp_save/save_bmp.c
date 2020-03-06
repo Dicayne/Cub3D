@@ -6,13 +6,13 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 14:59:41 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/03/05 20:07:28 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/03/06 15:19:15 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../header/cub3d.h"
 
-unsigned char	*file_header_bmp(int filesize)
+static unsigned char	*file_header_bmp(int filesize)
 {
 	unsigned char	*bmpfileheader;
 
@@ -29,7 +29,7 @@ unsigned char	*file_header_bmp(int filesize)
 	return (bmpfileheader);
 }
 
-unsigned char	*info_header_bmp(t_cub3d *cub)
+static unsigned char	*info_header_bmp(t_cub3d *cub)
 {
 	unsigned char	*bmpinfoheader;
 
@@ -50,19 +50,28 @@ unsigned char	*info_header_bmp(t_cub3d *cub)
 	return (bmpinfoheader);
 }
 
-void			write_data(int file, char *data, t_cub3d *cub)
+static void				write_data(int file, char *data, t_cub3d *cub)
 {
-	int 			line;
+	int		line;
+	int		pos;
+	int		color;
 
-	line = cub->pars.scrheight;
-	while(line > 0)
+	line = cub->pars.scrheight - 1;
+	while (line >= 0)
 	{
-		write(file, data + cub->pars.scrwidth * line * 4, cub->pars.scrwidth * 4);
+		pos = 0;
+		while (pos < cub->pars.scrwidth)
+		{
+			color = *(unsigned int*)(data +
+									(line * cub->img.line_length + pos * 4));
+			write(file, &color, 4);
+			pos++;
+		}
 		line--;
 	}
 }
 
-void			save(t_cub3d *cub)
+void					save(t_cub3d *cub)
 {
 	int				filesize;
 	int				file;
@@ -70,7 +79,8 @@ void			save(t_cub3d *cub)
 	unsigned char	*bmpinfoheader;
 
 	filesize = 54 + 4 * cub->pars.scrwidth * cub->pars.scrheight;
-	file = open("screenshot/screenshot.bmp", O_WRONLY | O_CREAT | O_TRUNC , 0755);
+	file = open("screenshot/screenshot.bmp", O_WRONLY | O_CREAT |
+											O_TRUNC, 0755);
 	bmpfileheader = file_header_bmp(filesize);
 	write(file, bmpfileheader, 14);
 	free(bmpfileheader);
@@ -78,12 +88,10 @@ void			save(t_cub3d *cub)
 	write(file, bmpinfoheader, 40);
 	free(bmpinfoheader);
 	write_data(file, cub->img.adr, cub);
-	ft_printf("%s%sSCREENSHOT TAKEN\n",NC, GREEN);
+	ft_printf("%s%sSCREENSHOT TAKEN\n", NC, GREEN);
 	ft_printf("%sScreenshot stocked in ==> %s", YELLOW, CYAN);
 	system("cd screenshot && pwd");
+	system("open screenshot/screenshot.bmp");
 	if (cub->pars.save == 1)
-	{
-		system("open screenshot/screenshot.bmp");
 		exit(EXIT_SUCCESS);
-	}
 }

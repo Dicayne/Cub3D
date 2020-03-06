@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 14:34:06 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/03/05 16:52:05 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/03/06 16:12:00 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct	s_move
 	int d_on;
 	int g_on;
 	int dr_on;
+	int dm;
 }				t_move;
 typedef struct	s_map
 {

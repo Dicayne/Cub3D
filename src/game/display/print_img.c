@@ -6,12 +6,12 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 14:01:58 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/03/04 18:49:30 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/03/06 16:31:48 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../header/cub3d.h"
-int bool = 0;
+
 static int	find_pos_y(t_print *print, t_cub3d *cub, t_image *tex)
 {
 	int		y;
@@ -19,7 +19,7 @@ static int	find_pos_y(t_print *print, t_cub3d *cub, t_image *tex)
 	double	tex_pos;
 
 	y = 0;
-	step = 1.0 *  tex->img_h / print->line_height;
+	step = 1.0 * tex->img_h / print->line_height;
 	tex_pos = (print->draw_start - cub->pars.scrheight / 2
 										+ print->line_height / 2) * step;
 	if (print->line_height < cub->pars.scrheight)
@@ -50,13 +50,18 @@ static void	find_color(int side, t_print *print, t_cub3d *cub)
 		print->color = mlx_get_color_value(cub->map.mlx_ptr,
 				cub->tex.tex_s.tiadr[find_pos_y(print, cub, &cub->tex.tex_s)]
 					[(cub->cast.pos_tex.x_i * cub->tex.tex_s.img_w) / 1000]);
+	if (cub->move.dm == 1)
+		print->color = darkness_mode(print->color, print->wall_dist);
 }
 
 static void	print_img3(t_print *print, t_cub3d *cub, int side, int x)
 {
 	while (print->start < print->draw_start)
 	{
-		my_mlx_pixel_put(&cub->img, x, print->start, print->color_sky);
+		if (cub->move.dm == 1)
+			my_mlx_pixel_put(&cub->img, x, print->start, 0);
+		else
+			my_mlx_pixel_put(&cub->img, x, print->start, print->color_sky);
 		print->start++;
 	}
 	while (print->draw_start < print->draw_end)
@@ -68,7 +73,10 @@ static void	print_img3(t_print *print, t_cub3d *cub, int side, int x)
 	}
 	while (print->draw_end < cub->pars.scrheight - 1)
 	{
-		my_mlx_pixel_put(&cub->img, x, print->draw_end, print->color_floor);
+		if (cub->move.dm == 1)
+			my_mlx_pixel_put(&cub->img, x, print->draw_end, 0);
+		else
+			my_mlx_pixel_put(&cub->img, x, print->draw_end, print->color_floor);
 		print->draw_end++;
 	}
 }

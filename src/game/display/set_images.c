@@ -6,13 +6,13 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 16:14:19 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/03/05 20:00:57 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/03/06 15:05:31 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../header/cub3d.h"
 
-int	tab_text(t_image *img)
+int			tab_text(t_image *img)
 {
 	int i;
 	int j;

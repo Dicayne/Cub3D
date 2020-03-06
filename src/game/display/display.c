@@ -6,11 +6,32 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 13:34:12 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/03/05 19:22:00 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/03/06 16:34:39 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../header/cub3d.h"
+
+int			darkness_mode(int color, double wall_dist)
+{
+	int		r;
+	int		g;
+	int		b;
+	double	per;
+
+	r = 0xff0000 & color;
+	g = 0xff00 & color;
+	b = 0xff & color;
+	per = 1.0f - wall_dist / 8;
+	if (per < 0.0f)
+		per = 0.0f;
+	else if (per > 1.0f)
+		per = 1.0f;
+	r = ((int)((double)0x0 + (r - 0x0) * per) & 0xFF0000);
+	g = ((int)((double)0x0 + (g - 0x0) * per) & 0xFF00);
+	b = ((int)((double)0x0 + (b - 0x0) * per) & 0xFF);
+	return (r + g + b);
+}
 
 void		my_mlx_pixel_put(t_image *img, int x, int y, int color)
 {
@@ -26,11 +47,9 @@ void		display(t_cub3d *cub)
 	{
 		mlx_put_image_to_window(cub->map.mlx_ptr, cub->map.mlx_win,
 						cub->img.img, 0, 0);
-		// mlx_put_image_to_window(cub->map.mlx_ptr, cub->map.mlx_win,
-		// 			cub->tex.tex_s.img, cub->pars.scrwidth / 2,
-		// 			cub->pars.scrheight / 2);
-		mlx_string_put(cub->map.mlx_ptr, cub->map.mlx_win, cub->pars.scrwidth / 2,
-						cub->pars.scrheight / 2, 0xffffff, "X");
+		mlx_string_put(cub->map.mlx_ptr, cub->map.mlx_win,
+						cub->pars.scrwidth / 2, cub->pars.scrheight / 2,
+						0xffffff, "X");
 		if (cub->pars.scrheight > 300 && cub->pars.scrwidth > 300)
 			put_mini_map(cub);
 		if (cub->bool == 1)

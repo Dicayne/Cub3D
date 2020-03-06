@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 17:13:04 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/03/05 20:00:49 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/03/06 16:31:28 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # define D 2
 # define A 0
 # define G 123
+# define F 3
 # define DR 124
 # define MS 0.2
 # define RS 0.080
@@ -48,7 +49,9 @@ void			init_struct_pars(t_path *pars, t_map *map);
 */
 void			init_dir(t_map map, t_cast *cast);
 void			init_plane(t_cast *cast);
+void			check_dir_plane(t_cub3d *cub);
 void			init_world_color(t_cub3d *cub, int *sky, int *floor);
+int				darkness_mode(int color, double wall_dist);
 void			start(t_cub3d *cub);
 void			init_img_struct(t_cub3d *cub);
 void			my_mlx_pixel_put(t_image *img, int x, int y, int color);
