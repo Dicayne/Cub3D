@@ -6,13 +6,13 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 14:01:58 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/03/06 16:31:48 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/03/07 14:26:51 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../header/cub3d.h"
 
-static int	find_pos_y(t_print *print, t_cub3d *cub, t_image *tex)
+int			find_pos_y(t_print *print, t_cub3d *cub, t_image *tex)
 {
 	int		y;
 	double	step;
@@ -46,10 +46,6 @@ static void	find_color(int side, t_print *print, t_cub3d *cub)
 		print->color = mlx_get_color_value(cub->map.mlx_ptr,
 				cub->tex.tex_we.tiadr[find_pos_y(print, cub, &cub->tex.tex_we)]
 					[(cub->cast.pos_tex.x_i * cub->tex.tex_we.img_w) / 1000]);
-	else if (side == 5)
-		print->color = mlx_get_color_value(cub->map.mlx_ptr,
-				cub->tex.tex_s.tiadr[find_pos_y(print, cub, &cub->tex.tex_s)]
-					[(cub->cast.pos_tex.x_i * cub->tex.tex_s.img_w) / 1000]);
 	if (cub->move.dm == 1)
 		print->color = darkness_mode(print->color, print->wall_dist);
 }
@@ -81,13 +77,13 @@ static void	print_img3(t_print *print, t_cub3d *cub, int side, int x)
 	}
 }
 
-static void	print_img2(double wall_dist, int side, t_cub3d *cub, int x)
+static void	print_img2(int side, t_cub3d *cub, int x)
 {
 	t_print print;
 
-	print.wall_dist = wall_dist;
+	print.wall_dist = cub->cast.wall_dist;
 	print.start = 0;
-	print.line_height = cub->pars.scrheight / wall_dist;
+	print.line_height = cub->pars.scrheight / print.wall_dist;
 	print.draw_start = -print.line_height / 2 + cub->pars.scrheight / 2;
 	if (print.draw_start < 0)
 		print.draw_start = 0;
@@ -99,13 +95,15 @@ static void	print_img2(double wall_dist, int side, t_cub3d *cub, int x)
 	print_img3(&print, cub, side, x);
 }
 
-void		print_img(double wall_dist, int side, t_cub3d *cub, int x)
+void		print_img(int side, t_cub3d *cub, int x)
 {
-	cub->cast.pos_tex.x_f = cub->map.pos_y + wall_dist * cub->cast.ray_dir.y_f;
-	cub->cast.pos_tex.y_f = cub->map.pos_x + wall_dist * cub->cast.ray_dir.x_f;
+	cub->cast.pos_tex.x_f = cub->map.pos_y + cub->cast.wall_dist *
+													cub->cast.ray_dir.y_f;
+	cub->cast.pos_tex.y_f = cub->map.pos_x + cub->cast.wall_dist *
+													cub->cast.ray_dir.x_f;
 	cub->cast.pos_tex.x_i = (cub->cast.pos_tex.x_f -
 								(int)cub->cast.pos_tex.x_f) * 1000;
 	cub->cast.pos_tex.y_i = (cub->cast.pos_tex.y_f -
 								(int)cub->cast.pos_tex.y_f) * 1000;
-	print_img2(wall_dist, side, cub, x);
+	print_img2(side, cub, x);
 }

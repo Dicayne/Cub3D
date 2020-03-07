@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 13:34:12 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/03/06 16:34:39 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/03/07 14:07:24 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int			darkness_mode(int color, double wall_dist)
 	r = 0xff0000 & color;
 	g = 0xff00 & color;
 	b = 0xff & color;
-	per = 1.0f - wall_dist / 8;
+	per = 1.0f - wall_dist / 12;
 	if (per < 0.0f)
 		per = 0.0f;
 	else if (per > 1.0f)
@@ -46,7 +46,7 @@ void		display(t_cub3d *cub)
 	if (cub->pars.save == 0)
 	{
 		mlx_put_image_to_window(cub->map.mlx_ptr, cub->map.mlx_win,
-						cub->img.img, 0, 0);
+					cub->img.img, 0, 0);
 		mlx_string_put(cub->map.mlx_ptr, cub->map.mlx_win,
 						cub->pars.scrwidth / 2, cub->pars.scrheight / 2,
 						0xffffff, "X");

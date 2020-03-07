@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 14:45:57 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/03/06 16:23:51 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/03/07 12:58:40 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int			close_prog(t_cub3d *cub)
 {
-	ft_printf("%sSee you soon %s:'( %s...\n", CYAN, YELLOW, NC);
+	ft_printf("%sSee you soon %s:'( %s\n", CYAN, YELLOW, NC);
 	mlx_clear_window(cub->map.mlx_ptr, cub->map.mlx_win);
 	mlx_destroy_window(cub->map.mlx_ptr, cub->map.mlx_win);
 	exit(EXIT_SUCCESS);

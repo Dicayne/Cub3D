@@ -6,7 +6,7 @@
 #    By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/05 18:22:15 by vmoreau           #+#    #+#              #
-#    Updated: 2020/03/06 13:57:19 by vmoreau          ###   ########.fr        #
+#    Updated: 2020/03/07 14:33:09 by vmoreau          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,8 @@ SRCS +=	$(DISP)init_world.c			$(DISP)print_img.c	$(DISP)display.c	 \
 SRCS += $(SAVE)save_bmp.c
 
 #---------------Ray_cast---------------#
-SRCS +=	$(RAY)init_struct_ray.c		$(RAY)ray_cast.c	$(RAY)cub3d.c
+SRCS +=	$(RAY)init_struct_ray.c		$(RAY)ray_cast.c	$(RAY)cub3d.c		 \
+		$(RAY)sprit_cast.c
 
 #####################################PARTH#####################################
 

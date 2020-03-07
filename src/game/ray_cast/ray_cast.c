@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/08 20:29:09 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/03/06 16:14:12 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/03/07 15:00:15 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ static void	prep_ray_cast2(t_cast *cast, t_map map)
 static void	prep_ray_cast(t_cast *cast, t_path pars, int x, t_map map)
 {
 	init_camera(cast, pars, x);
+	cast->sprit_dst = 0;
+	cast->wall_dist = 0;
 	cast->map.x_i = map.pos_x;
 	cast->map.y_i = map.pos_y;
 	cast->delta_dist.y_f = sqrt(1 + (cast->ray_dir.x_f * cast->ray_dir.x_f) /
@@ -52,15 +54,21 @@ static void	prep_ray_cast(t_cast *cast, t_path pars, int x, t_map map)
 	prep_ray_cast2(cast, map);
 }
 
-static int	check_side(double x)
+static void	check_side(int *side, t_cast *cast)
 {
-	if (x > 0)
-		return (0);
+	if (*side == 1)
+	{
+		if (cast->ray_dir.y_f < 0)
+			*side += 2;
+	}
 	else
-		return (2);
+	{
+		if (cast->ray_dir.x_f < 0)
+			*side += 2;
+	}
 }
 
-static void	ray_throw(t_cast *cast, t_map map, int *side)
+static void	ray_throw(t_cast *cast, t_map map, int *side, t_cub3d *cub)
 {
 	int	hit;
 
@@ -81,11 +89,10 @@ static void	ray_throw(t_cast *cast, t_map map, int *side)
 		}
 		if (map.map[cast->map.y_i][cast->map.x_i] == 1)
 			hit = 1;
+		if (map.map[cast->map.y_i][cast->map.x_i] == 2 && cast->sprit_dst == 0)
+			cast->sprit_dst = sprit_dist(*side, cub);
 	}
-	if (*side == 1)
-		*side += check_side(cast->ray_dir.y_f);
-	else
-		*side += check_side(cast->ray_dir.x_f);
+	check_side(side, cast);
 }
 
 void		ray_cast(t_cub3d *cub)
@@ -101,14 +108,16 @@ void		ray_cast(t_cub3d *cub)
 	while (x < cub->pars.scrwidth)
 	{
 		prep_ray_cast(&cub->cast, cub->pars, x, cub->map);
-		ray_throw(&cub->cast, cub->map, &side);
+		ray_throw(&cub->cast, cub->map, &side, cub);
 		if (side == 0 || side == 2)
 			cub->cast.wall_dist = (cub->cast.map.x_i - cub->map.pos_x +
 						(1 - cub->cast.step.x_i) / 2) / cub->cast.ray_dir.x_f;
 		else
 			cub->cast.wall_dist = (cub->cast.map.y_i - cub->map.pos_y +
 						(1 - cub->cast.step.y_i) / 2) / cub->cast.ray_dir.y_f;
-		print_img(cub->cast.wall_dist, side, cub, x);
+		print_img(side, cub, x);
+		if (cub->cast.sprit_dst != 0)
+			print_sprit(cub, x);
 		x++;
 	}
 	display(cub);

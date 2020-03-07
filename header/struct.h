@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 14:34:06 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/03/06 16:12:00 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/03/07 14:29:55 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,8 @@ typedef struct	s_cast
 	t_coor_vec	step;
 	t_coor_vec	pos_tex;
 	double		wall_dist;
+	double		sprit_dst;
+	int			sprit_side;
 }				t_cast;
 typedef struct	s_image
 {
