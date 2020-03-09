@@ -6,7 +6,7 @@
 #    By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/05 18:22:15 by vmoreau           #+#    #+#              #
-#    Updated: 2020/03/07 14:33:09 by vmoreau          ###   ########.fr        #
+#    Updated: 2020/03/09 19:22:42 by vmoreau          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,8 @@ SRCS +=	src/main.c
 
 #---------------Parsing----------------#
 SRCS +=	$(PARS)init_struct_pars.c	$(PARS)parsing.c	$(PARS)parsing_map.c \
-		$(PARS)utils_parsing.c		$(PARS)check_map.c	$(PARS)check_map2.c
+		$(PARS)utils_parsing.c		$(PARS)check_map.c	$(PARS)check_map2.c	 \
+		$(PARS)check_sprite.c
 
 #----------------Event-----------------#
 SRCS +=	$(EVENT)init_struct_ev.c	$(EVENT)move_w_s.c	$(EVENT)move_a_d.c	 \
@@ -48,7 +49,7 @@ SRCS += $(SAVE)save_bmp.c
 
 #---------------Ray_cast---------------#
 SRCS +=	$(RAY)init_struct_ray.c		$(RAY)ray_cast.c	$(RAY)cub3d.c		 \
-		$(RAY)sprit_cast.c
+		$(RAY)sprit_cast.c			$(RAY)sprit_cast2.c
 
 #####################################PARTH#####################################
 
@@ -113,8 +114,8 @@ $(OBJS) : %.o: %.c $(HEADER)
 	printf "$(CYAN).$(NC)"
 
 $(NAME) : echoCL $(OBJS) echoOK echoCS
-	$(CC) -O3 $(CFLAGS) -flto -march=native -o $@ $(OBJS) $(OBJLIB) -L ./ -lmlx
-	# $(CC) $(CFLAGS) -o $@ $(OBJS) $(OBJLIB) -g3 -fsanitize=address -L ./ -lmlx
+	# $(CC) -O3 $(CFLAGS) -flto -march=native -o $@ $(OBJS) $(OBJLIB) -L ./ -lmlx
+	$(CC) $(CFLAGS) -o $@ $(OBJS) $(OBJLIB) -g3 -fsanitize=address -L ./ -lmlx
 
 
 complib :

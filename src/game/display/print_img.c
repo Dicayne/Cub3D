@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 14:01:58 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/03/07 14:26:51 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/03/09 13:58:45 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,11 +77,11 @@ static void	print_img3(t_print *print, t_cub3d *cub, int side, int x)
 	}
 }
 
-static void	print_img2(int side, t_cub3d *cub, int x)
+static void	print_img2(int side, t_cub3d *cub, int x, double dst)
 {
 	t_print print;
 
-	print.wall_dist = cub->cast.wall_dist;
+	print.wall_dist = dst;
 	print.start = 0;
 	print.line_height = cub->pars.scrheight / print.wall_dist;
 	print.draw_start = -print.line_height / 2 + cub->pars.scrheight / 2;
@@ -95,15 +95,13 @@ static void	print_img2(int side, t_cub3d *cub, int x)
 	print_img3(&print, cub, side, x);
 }
 
-void		print_img(int side, t_cub3d *cub, int x)
+void		print_img(int side, t_cub3d *cub, int x, double dst)
 {
-	cub->cast.pos_tex.x_f = cub->map.pos_y + cub->cast.wall_dist *
-													cub->cast.ray_dir.y_f;
-	cub->cast.pos_tex.y_f = cub->map.pos_x + cub->cast.wall_dist *
-													cub->cast.ray_dir.x_f;
+	cub->cast.pos_tex.x_f = cub->map.pos_y + dst * cub->cast.ray_dir.y_f;
+	cub->cast.pos_tex.y_f = cub->map.pos_x + dst * cub->cast.ray_dir.x_f;
 	cub->cast.pos_tex.x_i = (cub->cast.pos_tex.x_f -
 								(int)cub->cast.pos_tex.x_f) * 1000;
 	cub->cast.pos_tex.y_i = (cub->cast.pos_tex.y_f -
 								(int)cub->cast.pos_tex.y_f) * 1000;
-	print_img2(side, cub, x);
+	print_img2(side, cub, x, dst);
 }

@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 18:13:20 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/03/03 13:26:00 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/03/09 10:50:34 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void		init_struct_pars(t_path *pars, t_map *map)
 	map->pos_x = -1;
 	map->pos_y = -1;
 	map->dir = '\0';
+	map->nb_sprit = 0;
 }
 
 static void	free_map(t_map *map)

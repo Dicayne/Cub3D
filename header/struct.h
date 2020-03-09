@@ -6,13 +6,18 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 14:34:06 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/03/07 14:29:55 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/03/09 19:37:10 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
 
+typedef struct	s_sp
+{
+	double x;
+	double y;
+}				t_sp;
 typedef struct	s_print
 {
 	int		line_height;
@@ -51,6 +56,8 @@ typedef struct	s_map
 	double	pos_x;
 	double	pos_y;
 	char	dir;
+	int		nb_sprit;
+	t_sp	*sprit;
 }				t_map;
 typedef struct	s_path
 {
@@ -73,6 +80,17 @@ typedef struct	s_coor_vec
 	int		x_i;
 	int		y_i;
 }				t_coor_vec;
+typedef struct	s_sprit
+{
+	t_coor_vec	sprite;
+	t_coor_vec	trans;
+	t_coor_vec	sp_size;
+	t_coor_vec	draw_start;
+	t_coor_vec	draw_end;
+	t_coor_vec	tex;
+	int			scr_x;
+	int			color;
+}				t_sprit;
 typedef struct	s_cast
 {
 	t_coor_vec	dir;
@@ -84,7 +102,7 @@ typedef struct	s_cast
 	t_coor_vec	step;
 	t_coor_vec	pos_tex;
 	double		wall_dist;
-	double		sprit_dst;
+	double		*sprit_dst;
 	int			sprit_side;
 }				t_cast;
 typedef struct	s_image

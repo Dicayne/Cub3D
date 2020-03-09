@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/08 20:29:09 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/03/07 15:00:15 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/03/09 18:54:14 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static void	check_side(int *side, t_cast *cast)
 	}
 }
 
-static void	ray_throw(t_cast *cast, t_map map, int *side, t_cub3d *cub)
+static void	ray_throw(t_cast *cast, int *side, t_cub3d *cub)
 {
 	int	hit;
 
@@ -87,10 +87,8 @@ static void	ray_throw(t_cast *cast, t_map map, int *side, t_cub3d *cub)
 			cast->map.y_i += cast->step.y_i;
 			*side = 1;
 		}
-		if (map.map[cast->map.y_i][cast->map.x_i] == 1)
+		if (cub->map.map[cast->map.y_i][cast->map.x_i] == 1)
 			hit = 1;
-		if (map.map[cast->map.y_i][cast->map.x_i] == 2 && cast->sprit_dst == 0)
-			cast->sprit_dst = sprit_dist(*side, cub);
 	}
 	check_side(side, cast);
 }
@@ -99,6 +97,7 @@ void		ray_cast(t_cub3d *cub)
 {
 	int			x;
 	int			side;
+	double		tab_wdst[cub->pars.scrwidth];
 
 	check_dir_plane(cub);
 	if (cub->bool == 0)
@@ -108,17 +107,16 @@ void		ray_cast(t_cub3d *cub)
 	while (x < cub->pars.scrwidth)
 	{
 		prep_ray_cast(&cub->cast, cub->pars, x, cub->map);
-		ray_throw(&cub->cast, cub->map, &side, cub);
+		ray_throw(&cub->cast, &side, cub);
 		if (side == 0 || side == 2)
-			cub->cast.wall_dist = (cub->cast.map.x_i - cub->map.pos_x +
+			tab_wdst[x] = (cub->cast.map.x_i - cub->map.pos_x +
 						(1 - cub->cast.step.x_i) / 2) / cub->cast.ray_dir.x_f;
 		else
-			cub->cast.wall_dist = (cub->cast.map.y_i - cub->map.pos_y +
+			tab_wdst[x] = (cub->cast.map.y_i - cub->map.pos_y +
 						(1 - cub->cast.step.y_i) / 2) / cub->cast.ray_dir.y_f;
-		print_img(side, cub, x);
-		if (cub->cast.sprit_dst != 0)
-			print_sprit(cub, x);
+		print_img(side, cub, x, tab_wdst[x]);
 		x++;
 	}
+	print_sprit(cub, tab_wdst);
 	display(cub);
 }
