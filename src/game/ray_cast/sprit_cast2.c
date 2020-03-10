@@ -6,13 +6,13 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/09 11:04:00 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/03/09 19:22:24 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/03/10 11:24:28 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../header/cub3d.h"
 
-static void sort_sprites(int* ord, double* dist, int nb_sp)
+static void	sort_sprites(int *ord, double *dist, int nb_sp)
 {
 	int		i;
 	int		tmp;
@@ -35,7 +35,7 @@ static void sort_sprites(int* ord, double* dist, int nb_sp)
 	}
 }
 
-void 		find_sp_dst(t_cub3d *cub, int *ord, double *dst)
+void		find_sp_dst(t_cub3d *cub, int *ord, double *dst)
 {
 	int i;
 

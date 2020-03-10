@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 16:14:19 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/03/07 12:57:41 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/03/10 19:56:25 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int			tab_text(t_image *img)
 	return (0);
 }
 
-static int	get_img_info(t_image *img, void *mlx_ptr, char *path_tex)
+int			get_img_info(t_image *img, void *mlx_ptr, char *path_tex)
 {
 	img->img = mlx_xpm_file_to_image(mlx_ptr, path_tex, &img->img_w,
 									&img->img_h);
@@ -61,6 +61,7 @@ static int	get_img_info(t_image *img, void *mlx_ptr, char *path_tex)
 
 void		set_images(t_cub3d *cub)
 {
+	cub->tex.weap.path = ft_strdup("./texture/sprite/shotgun.xpm");
 	if (get_img_info(
 				&cub->tex.tex_no, cub->map.mlx_ptr, cub->pars.pars_no) == -1)
 		close_prog(cub);
@@ -75,5 +76,8 @@ void		set_images(t_cub3d *cub)
 		close_prog(cub);
 	if (get_img_info(
 				&cub->tex.tex_s, cub->map.mlx_ptr, cub->pars.pars_s) == -1)
+		close_prog(cub);
+	if (get_img_info(
+				&cub->tex.weap, cub->map.mlx_ptr, cub->tex.weap.path) == -1)
 		close_prog(cub);
 }

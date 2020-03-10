@@ -6,28 +6,44 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/07 13:21:54 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/03/09 20:04:31 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/03/10 15:48:43 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../header/cub3d.h"
 
+static void	find_color(t_cub3d *cub, double *wdst, t_sprit *sp, int d)
+{
+	sp->tex.y_i = d * cub->tex.tex_s.img_h / sp->sp_size.y_i / 256;
+	sp->color = cub->tex.tex_s.iadr
+				[cub->tex.tex_s.img_h * sp->tex.y_i + sp->tex.x_i];
+	if (cub->move.dm == 1)
+		sp->color = darkness_mode(sp->color, wdst[sp->draw_start.x_i]);
+}
+
+static void	print_color(t_cub3d *cub, t_sprit *sp, int y)
+{
+	if ((sp->color & 0x00FFFFFF) != 0)
+		my_mlx_pixel_put(&cub->img, sp->draw_start.x_i, y, sp->color);
+}
+
 static void	print_sprit3(t_cub3d *cub, t_sprit *sp)
 {
-	sp->scr_x = (int)(cub->pars.scrwidth / 2) * (1 + sp->trans.x_f / sp->trans.y_f);
-	sp->sp_size.y_i = abs((int)(cub->pars.scrheight / (sp->trans.y_f))); 
+	sp->scr_x = (int)(cub->pars.scrwidth / 2) *
+											(1 + sp->trans.x_f / sp->trans.y_f);
+	sp->sp_size.y_i = abs((int)(cub->pars.scrheight / (sp->trans.y_f)));
+	sp->sp_size.x_i = abs((int)(cub->pars.scrheight / (sp->trans.y_f)));
 	sp->draw_start.y_i = -sp->sp_size.y_i / 2 + cub->pars.scrheight / 2;
-	if(sp->draw_start.y_i < 0)
+	if (sp->draw_start.y_i < 0)
 		sp->draw_start.y_i = 0;
 	sp->draw_end.y_i = sp->sp_size.y_i / 2 + cub->pars.scrheight / 2;
-	if(sp->draw_end.y_i >= cub->pars.scrheight)
+	if (sp->draw_end.y_i >= cub->pars.scrheight)
 		sp->draw_end.y_i = cub->pars.scrheight - 1;
-	sp->sp_size.x_i = abs((int)(cub->pars.scrheight / (sp->trans.y_f)));
 	sp->draw_start.x_i = -sp->sp_size.x_i / 2 + sp->scr_x;
-	if(sp->draw_start.x_i < 0)
+	if (sp->draw_start.x_i < 0)
 		sp->draw_start.x_i = 0;
 	sp->draw_end.x_i = sp->sp_size.x_i / 2 + sp->scr_x;
-	if(sp->draw_end.x_i >= cub->pars.scrwidth)
+	if (sp->draw_end.x_i >= cub->pars.scrwidth)
 		sp->draw_end.x_i = cub->pars.scrwidth - 1;
 }
 
@@ -37,18 +53,19 @@ static void	print_sprit2(t_cub3d *cub, double *wdst, t_sprit *sp)
 	int y;
 
 	print_sprit3(cub, sp);
-	while(sp->draw_start.x_i < sp->draw_end.x_i)
+	while (sp->draw_start.x_i < sp->draw_end.x_i)
 	{
-		sp->tex.x_i = (int)(256 * (sp->draw_start.x_i - (-sp->sp_size.x_i / 2 + sp->scr_x)) * cub->tex.tex_s.img_w / sp->sp_size.x_i) / 256;
+		sp->tex.x_i = ((sp->draw_start.x_i - (-sp->sp_size.x_i / 2 + sp->scr_x))
+						* cub->tex.tex_s.img_w / sp->sp_size.x_i);
 		y = sp->draw_start.y_i;
-		if(sp->trans.y_f > 0 && sp->draw_start.x_i > 0 && sp->draw_start.x_i < cub->pars.scrwidth && sp->trans.y_f < wdst[sp->draw_start.x_i])
-			while(y < sp->draw_end.y_i)
+		if (sp->trans.y_f > 0 && sp->draw_start.x_i > 0 &&
+			sp->draw_start.x_i < cub->pars.scrwidth &&
+			sp->trans.y_f < wdst[sp->draw_start.x_i])
+			while (y < sp->draw_end.y_i)
 			{
-				d = (y) * 256 - cub->pars.scrheight * 128 + sp->sp_size.y_i * 128;
-				sp->tex.y_i = ((d * cub->tex.tex_s.img_h) / sp->sp_size.y_i) / 256;
-				sp->color = cub->tex.tex_s.iadr[cub->tex.tex_s.img_h * sp->tex.y_i + sp->tex.x_i];
-				if ((sp->color & 0x00FFFFFF) != 0)
-					my_mlx_pixel_put(&cub->img, sp->draw_start.x_i, y, sp->color);
+				d = y * 256 - cub->pars.scrheight * 128 + sp->sp_size.y_i * 128;
+				find_color(cub, wdst, sp, d);
+				print_color(cub, sp, y);
 				y++;
 			}
 		sp->draw_start.x_i++;
@@ -60,19 +77,21 @@ void		print_sprit(t_cub3d *cub, double *wdst)
 	int		ord[cub->map.nb_sprit];
 	double	dst[cub->map.nb_sprit];
 	int		i;
-	t_sprit sp;
-	double invDet;
+	t_sprit	sp;
+	double	mult;
 
 	find_sp_dst(cub, ord, dst);
 	i = 0;
-	while(i < cub->map.nb_sprit)
+	while (i < cub->map.nb_sprit)
 	{
 		sp.sprite.x_f = cub->map.sprit[ord[i]].x - cub->map.pos_x;
 		sp.sprite.y_f = cub->map.sprit[ord[i]].y - cub->map.pos_y;
-
-		invDet = 1.0 / (cub->cast.plane.x_f * cub->cast.dir.y_f - cub->cast.dir.x_f * cub->cast.plane.y_f);
-		sp.trans.x_f = invDet * (cub->cast.dir.y_f * sp.sprite.x_f - cub->cast.dir.x_f * sp.sprite.y_f);
-		sp.trans.y_f = invDet * (-cub->cast.plane.y_f * sp.sprite.x_f + cub->cast.plane.x_f * sp.sprite.y_f);
+		mult = 1.0 / (cub->cast.plane.x_f * cub->cast.dir.y_f -
+						cub->cast.dir.x_f * cub->cast.plane.y_f);
+		sp.trans.x_f = mult * (cub->cast.dir.y_f * sp.sprite.x_f -
+						cub->cast.dir.x_f * sp.sprite.y_f);
+		sp.trans.y_f = mult * (-cub->cast.plane.y_f * sp.sprite.x_f +
+						cub->cast.plane.x_f * sp.sprite.y_f);
 		print_sprit2(cub, wdst, &sp);
 		i++;
 	}

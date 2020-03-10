@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 18:12:15 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/03/04 18:20:41 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/03/10 12:34:40 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ void	from_0_to_8(t_map *map, int y, int x)
 				if (y == 0 || y == map->y - 1 || x == map->x - 1 || x == 0)
 					map->map[y][x] = 8;
 			}
+			if (map->map[y][x] == 11)
+				map->map[y][x] = 8;
 			x++;
 		}
 		y++;
@@ -94,30 +96,4 @@ int		strisnum(char *str)
 			return (-1);
 	}
 	return (1);
-}
-
-char	*clean_space(char **str)
-{
-	int		i;
-	int		len;
-	char	*ret;
-
-	i = 0;
-	len = strlen_c(*str, ' ', 9);
-	ret = (char *)malloc(sizeof(char) * (len + 1));
-	if (ret == NULL)
-		return (NULL);
-	len = 0;
-	while ((*str)[i] != '\0')
-	{
-		if ((*str)[i] != ' ' && (*str)[i] != 9)
-		{
-			ret[len] = (*str)[i];
-			len++;
-		}
-		i++;
-	}
-	ret[len] = '\0';
-	free(*str);
-	return (ret);
 }

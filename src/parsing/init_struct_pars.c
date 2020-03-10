@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 18:13:20 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/03/09 10:50:34 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/03/10 20:05:28 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,26 @@ static void	free_map(t_map *map)
 	free(map->map);
 }
 
+void		free_tab_int(t_image *img)
+{
+	int y;
+
+	y = 0;
+	while (y < img->img_h)
+	{
+		free(img->tiadr[y]);
+		y++;
+	}
+	free(img->tiadr);
+}
+
+void		free_img(t_image *img)
+{
+	img->img != NULL ? free(img->img) : img->img;
+	img->path != NULL ? free(img->path) : img->path;
+	free_tab_int(img);
+}
+
 void		free_struct(t_path *pars, t_map *map)
 {
 	pars->pars_no != NULL ? free(pars->pars_no) : pars->pars_no;
@@ -57,4 +77,5 @@ void		free_struct(t_path *pars, t_map *map)
 	pars->error != NULL ? free(pars->error) : pars->error;
 	if (map->x != 0)
 		free_map(map);
+	free(map->sprit);
 }

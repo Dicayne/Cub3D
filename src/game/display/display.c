@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 13:34:12 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/03/07 14:07:24 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/03/10 20:08:47 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,29 @@ void		my_mlx_pixel_put(t_image *img, int x, int y, int color)
 	*(int*)dst = color;
 }
 
+static void	init_weap(t_cub3d *cub)
+{
+	free(cub->tex.weap.path);
+	free_tab_int(&cub->tex.weap);
+	if (cub->move.shot == 0)
+		cub->tex.weap.path = ft_strdup("./texture/sprite/shotgun.xpm");
+	else
+		cub->tex.weap.path = ft_strdup("./texture/sprite/shotgun2.xpm");
+	if (get_img_info(
+			&cub->tex.weap, cub->map.mlx_ptr, cub->tex.weap.path) == -1)
+		close_prog(cub);
+}
+
 void		display(t_cub3d *cub)
 {
 	if (cub->pars.save == 0)
 	{
 		mlx_put_image_to_window(cub->map.mlx_ptr, cub->map.mlx_win,
 					cub->img.img, 0, 0);
+		init_weap(cub);
+		mlx_put_image_to_window(cub->map.mlx_ptr, cub->map.mlx_win,
+					cub->tex.weap.img, cub->pars.scrwidth / 2,
+					cub->pars.scrheight - (cub->tex.weap.img_h + 2));
 		mlx_string_put(cub->map.mlx_ptr, cub->map.mlx_win,
 						cub->pars.scrwidth / 2, cub->pars.scrheight / 2,
 						0xffffff, "X");

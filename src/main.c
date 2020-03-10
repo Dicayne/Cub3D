@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 17:16:18 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/03/06 23:49:32 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/03/10 13:40:15 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,7 @@ int		main(int ac, char **av)
 		if (parsing_fd(&cub.pars, &cub.map, av[1]) == -1)
 			ft_printf("%sError\n%s%s", RED, YELLOW, cub.pars.error);
 		else
-		{
-			//display_parsing(cub.pars, cub.map);
 			start(&cub);
-		}
 	}
 	else
 		ft_printf("%sError\n%sArguments ERROR\n", RED, YELLOW);

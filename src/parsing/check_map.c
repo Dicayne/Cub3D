@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/08 11:43:08 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/03/09 18:57:16 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/03/10 12:37:19 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ static int	check_value(t_map *map, int y, int x)
 		{
 			if (!((map->map[y][x] >= 0 && map->map[y][x] <= 2)
 			|| map->map[y][x] == 30 || map->map[y][x] == 35
-			|| map->map[y][x] == 39 || map->map[y][x] == 21))
+			|| map->map[y][x] == 39 || map->map[y][x] == 21
+			|| map->map[y][x] == 11))
 				return (-1);
 			if (map->map[y][x] == 2)
 				map->nb_sprit++;
@@ -86,21 +87,13 @@ int			check_map(t_map *map, t_path *pars)
 
 	x = 0;
 	y = 0;
+	pars->error = ft_strdup("Map ERROR\n");
 	if (check_value(map, y, x) == -1)
-	{
-		pars->error = ft_strdup("Map ERROR\n");
 		return (-1);
-	}
 	else if (check_pos(map, y, x) == -1)
-	{
-		pars->error = ft_strdup("Map ERROR\n");
 		return (-1);
-	}
 	else if (check_closed_map(map, y, x) == -1)
-	{
-		pars->error = ft_strdup("Map ERROR\n");
 		return (-1);
-	}
 	from_8_to_1(map);
 	if (map->nb_sprit > 0)
 		map->sprit = fill_sprit(map);

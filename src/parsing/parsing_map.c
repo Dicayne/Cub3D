@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 15:26:34 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/02/12 10:26:03 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/03/10 12:34:22 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,12 @@ static int	pars_map3(char **split, t_map *map)
 	{
 		x = 0;
 		map->map[y] = (int*)malloc(sizeof(int) * map->x);
-		if (map->map[y] == NULL)
-			return (-1);
 		while (split[y][x] != '\0')
 		{
-			map->map[y][x] = split[y][x] - 48;
+			if (split[y][x] == ' ')
+				map->map[y][x] = 11;
+			else
+				map->map[y][x] = split[y][x] - 48;
 			x++;
 		}
 		if (x < map->x)
@@ -50,7 +51,6 @@ static int	pars_map2(char **split, t_map *map)
 	y = 0;
 	while (split[i] != NULL)
 	{
-		split[i] = clean_space(&split[i]);
 		if (x < (int)ft_strlen(split[i]))
 			x = ft_strlen(split[i]);
 		if (split[i][0] == '\0')

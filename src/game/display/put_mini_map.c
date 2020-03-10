@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 17:30:22 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/03/07 12:30:53 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/03/10 16:16:26 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static void		init_img_mmap(t_cub3d *cub, t_image *m_map)
 {
-	m_map->img_h = cub->pars.scrheight / 5;
-	m_map->img_w = cub->pars.scrwidth / 5;
+	m_map->img_h = cub->pars.scrheight / 4.5;
+	m_map->img_w = cub->pars.scrwidth / 4.5;
 	m_map->img = mlx_new_image(cub->map.mlx_ptr, m_map->img_w, m_map->img_h);
 	m_map->adr = mlx_get_data_addr(m_map->img, &m_map->bits_per_pixel,
 					&m_map->line_length, &m_map->endian);
@@ -68,6 +68,9 @@ static void		base_m_map(t_cub3d *cub, t_image *m_map)
 			if (cub->map.map[(y * cub->map.y) / m_map->img_h]
 							[(x * cub->map.x) / m_map->img_w] == 1)
 				my_mlx_pixel_put(m_map, x, y, 0xff0000);
+			if (cub->map.map[(y * cub->map.y) / m_map->img_h]
+							[(x * cub->map.x) / m_map->img_w] == 2)
+				my_mlx_pixel_put(m_map, x, y, 0xff);
 			x++;
 		}
 		y++;
