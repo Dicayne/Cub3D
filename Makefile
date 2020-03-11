@@ -6,7 +6,7 @@
 #    By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/05 18:22:15 by vmoreau           #+#    #+#              #
-#    Updated: 2020/03/10 19:36:03 by vmoreau          ###   ########.fr        #
+#    Updated: 2020/03/11 19:55:47 by vmoreau          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,7 @@ SRCS +=	$(EVENT)init_struct_ev.c	$(EVENT)move_w_s.c	$(EVENT)move_a_d.c	 \
 
 #---------------Display----------------#
 SRCS +=	$(DISP)init_world.c			$(DISP)print_img.c	$(DISP)display.c	 \
-		$(DISP)put_mini_map.c		$(DISP)set_images.c	
+		$(DISP)put_mini_map.c		$(DISP)set_images.c	$(DISP)print_weap.c
 
 #---------------Save_BMP---------------#
 SRCS += $(SAVE)save_bmp.c
@@ -69,21 +69,21 @@ CC = clang
 CFLAGS = -Wall -Wextra
 ifeq ($(d), 0)
 	CFLAGS += -g3
-else ifeq ($(d), 1) 
+else ifeq ($(d), 1)
 	CFLAGS += -g3
 	CFLAGS += -fsanitize=address,undefined
-else ifeq ($(d), 2) 
+else ifeq ($(d), 2)
 	CFLAGS += -g3
 	CFLAGS += -fsanitize=address,undefined
 	CFLAGS += -ansi
 	CFLAGS += -pedantic
-else ifeq ($(d), 3) 
+else ifeq ($(d), 3)
 	CFLAGS += -g3
 	CFLAGS += -fsanitize=address,undefined
 	CFLAGS += -ansi
 	CFLAGS += -pedantic
 	CFLAGS += -Wpadded
-else ifeq ($(d), 4) 
+else ifeq ($(d), 4)
 	CFLAGS += -g3
 	CFLAGS += -fsanitize=address,undefined
 	CFLAGS += -ansi

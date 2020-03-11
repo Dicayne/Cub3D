@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 17:13:04 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/03/11 13:27:46 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/03/11 19:59:30 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void			my_mlx_pixel_put(t_image *img, int x, int y, int color);
 void			init_world_color(t_cub3d *cub, int *sky, int *floor);
 void			put_mini_map(t_cub3d *cub);
 int				get_img_info(t_image *img, void *mlx_ptr, char *path_tex);
+void			print_weap(t_cub3d *cub);
 /*
 ** SPRITES
 */
