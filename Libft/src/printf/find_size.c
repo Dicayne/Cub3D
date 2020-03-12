@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 19:06:21 by vmoreau           #+#    #+#             */
-/*   Updated: 2019/12/15 16:24:55 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/03/12 22:35:05 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,7 @@ int		find_size_dec_u(unsigned int nbr)
 	size = 0;
 	if (nbr == 0)
 		return (1);
-	if (nbr < 0)
-		size++;
-	while (nbr > 0 || nbr < 0)
+	while (nbr > 0)
 	{
 		nbr = nbr / 10;
 		size++;
