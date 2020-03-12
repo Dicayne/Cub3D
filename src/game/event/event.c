@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 14:45:57 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/03/10 20:07:40 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/03/12 12:11:00 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int			close_prog(t_cub3d *cub)
 	mlx_destroy_window(cub->map.mlx_ptr, cub->map.mlx_win);
 	free_struct(&cub->pars, &cub->map);
 	free_img(&cub->tex.weap);
-	system("leaks cub3D");
+	// system("leaks cub3D");
 	exit(EXIT_SUCCESS);
 	return (0);
 }

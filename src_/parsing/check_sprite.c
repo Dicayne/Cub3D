@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/09 16:26:49 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/03/12 17:45:23 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/03/10 13:38:55 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,10 @@ static void	find_sprit(t_sp **sp, t_map *map)
 		x = 0;
 		while (x < map->x)
 		{
-			if (map->map[y][x] == 2 || map->map[y][x] == 3)
+			if (map->map[y][x] == 2)
 			{
 				(*sp)[i].x = x + 0.5;
 				(*sp)[i].y = y + 0.5;
-				if (map->map[y][x] == 2)
-					(*sp)[i].bool = 2;
-				else
-					(*sp)[i].bool = 3;
 				i++;
 			}
 			x++;
@@ -41,12 +37,12 @@ static void	find_sprit(t_sp **sp, t_map *map)
 	}
 }
 
-static void	set_sprite_tab(t_sp **sp, int nb_sprit)
+static void	set_sprite_tab(t_sp **sp, t_map *map)
 {
 	int i;
 
 	i = 0;
-	while (i < nb_sprit)
+	while (i < map->nb_sprit)
 	{
 		(*sp)[i].x = 0;
 		(*sp)[i].y = 0;
@@ -54,12 +50,12 @@ static void	set_sprite_tab(t_sp **sp, int nb_sprit)
 	}
 }
 
-t_sp		*fill_sprit(t_map *map, int nb_sprit)
+t_sp		*fill_sprit(t_map *map)
 {
 	t_sp *sp;
 
-	sp = (t_sp *)malloc(sizeof(t_sp) * nb_sprit);
-	set_sprite_tab(&sp, nb_sprit);
+	sp = (t_sp *)malloc(sizeof(t_sp) * map->nb_sprit);
+	set_sprite_tab(&sp, map);
 	find_sprit(&sp, map);
 	return (sp);
 }

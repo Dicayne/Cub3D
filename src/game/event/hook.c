@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 15:27:12 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/03/10 20:08:10 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/03/12 17:46:33 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ static int	count_sprit(t_map map)
 		x = 0;
 		while (x < map.x)
 		{
-			if (map.map[y][x] == 2)
+			if (map.map[y][x] == 2 || map.map[y][x] == 3)
 				ret++;
 			x++;
 		}
@@ -117,7 +117,7 @@ int			mouse_hook(int button, int x, int y, t_cub3d *cub)
 	if (tmp != cub->map.nb_sprit)
 	{
 		free(cub->map.sprit);
-		cub->map.sprit = fill_sprit(&cub->map);
+		cub->map.sprit = fill_sprit(&cub->map, cub->map.nb_sprit);
 	}
 	return (0);
 }

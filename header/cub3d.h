@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 17:13:04 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/03/11 19:59:30 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/03/12 18:20:00 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int				strisnum(char *str);
 int				check_map(t_map *map, t_path *pars);
 int				check_closed_map(t_map *map, int y, int x);
 void			init_struct_pars(t_path *pars, t_map *map);
-t_sp			*fill_sprit(t_map *map);
+t_sp			*fill_sprit(t_map *map, int nb_sprit);
 /*
 ** -----------------------GAME----------------------
 ** RAY_CAST
@@ -56,6 +56,8 @@ void			init_plane(t_cast *cast);
 void			check_dir_plane(t_cub3d *cub);
 void			init_img_struct(t_cub3d *cub);
 void			display(t_cub3d *cub);
+void			game_over(t_cub3d *cub);
+void			you_win(t_cub3d *cub);
 /*
 ** IMAGES
 */
@@ -69,11 +71,15 @@ void			init_world_color(t_cub3d *cub, int *sky, int *floor);
 void			put_mini_map(t_cub3d *cub);
 int				get_img_info(t_image *img, void *mlx_ptr, char *path_tex);
 void			print_weap(t_cub3d *cub);
+void			print_lifebarre(t_cub3d *cub);
+void			print_over_win(t_cub3d *cub, int bool);
 /*
 ** SPRITES
 */
-void			print_sprit(t_cub3d *cub, double *wdst);
+void			print_sprit(t_cub3d *cub, double *wdst, int nb_sprit);
 void			find_sp_dst(t_cub3d *cub, int *ord, double *dst);
+void			find_color_goal(t_cub3d *cub, double *wdst, t_sprit *sp, int d);
+void			find_color_sp(t_cub3d *cub, double *wdst, t_sprit *sp, int d);
 /*
 ** EVENT
 */

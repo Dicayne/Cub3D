@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 14:34:06 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/03/10 18:18:20 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/03/12 18:18:08 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ typedef struct	s_sp
 {
 	double x;
 	double y;
+	int bool;
 }				t_sp;
 typedef struct	s_print
 {
@@ -58,6 +59,8 @@ typedef struct	s_map
 	double	pos_y;
 	char	dir;
 	int		nb_sprit;
+	int		nb_goal;
+	int		nb_goal_start;
 	t_sp	*sprit;
 }				t_map;
 typedef struct	s_path
@@ -113,6 +116,8 @@ typedef struct	s_image
 	char	*path;
 	int		*iadr;
 	int		**tiadr;
+	int		hp;
+	int		g_o;
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
@@ -128,6 +133,10 @@ typedef struct	s_tex
 	t_image tex_we;
 	t_image tex_s;
 	t_image weap;
+	t_image lifbar;
+	t_image g_o;
+	t_image goal;
+	t_image y_w;
 }				t_tex;
 typedef struct	s_cub3d
 {

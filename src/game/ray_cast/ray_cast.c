@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/08 20:29:09 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/03/09 18:54:14 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/03/12 17:49:49 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,6 @@ void		ray_cast(t_cub3d *cub)
 		print_img(side, cub, x, tab_wdst[x]);
 		x++;
 	}
-	print_sprit(cub, tab_wdst);
+	print_sprit(cub, tab_wdst, cub->map.nb_sprit);
 	display(cub);
 }

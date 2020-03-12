@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/08 11:43:08 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/03/12 18:02:01 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/03/10 12:37:19 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 static int	check_value(t_map *map, int y, int x)
 {
 	map->nb_sprit = 0;
-	map->nb_goal = 0;
-	map->nb_goal_start = 0;
 	while (y < map->y)
 	{
 		x = 0;
@@ -25,18 +23,14 @@ static int	check_value(t_map *map, int y, int x)
 			if (!((map->map[y][x] >= 0 && map->map[y][x] <= 2)
 			|| map->map[y][x] == 30 || map->map[y][x] == 35
 			|| map->map[y][x] == 39 || map->map[y][x] == 21
-			|| map->map[y][x] == 11 || map->map[y][x] == 3))
+			|| map->map[y][x] == 11))
 				return (-1);
-			if (map->map[y][x] == 2 || map->map[y][x] == 3)
+			if (map->map[y][x] == 2)
 				map->nb_sprit++;
-			if (map->map[y][x] == 3)
-				map->nb_goal++;
 			x++;
 		}
 		y++;
 	}
-	if (map->nb_goal > 0)
-			map->nb_goal_start = 1;
 	return (0);
 }
 
@@ -102,6 +96,6 @@ int			check_map(t_map *map, t_path *pars)
 		return (-1);
 	from_8_to_1(map);
 	if (map->nb_sprit > 0)
-		map->sprit = fill_sprit(map, map->nb_sprit);
+		map->sprit = fill_sprit(map);
 	return (0);
 }

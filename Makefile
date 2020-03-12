@@ -6,7 +6,7 @@
 #    By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/05 18:22:15 by vmoreau           #+#    #+#              #
-#    Updated: 2020/03/11 19:55:47 by vmoreau          ###   ########.fr        #
+#    Updated: 2020/03/12 18:07:38 by vmoreau          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,8 @@ SRCS +=	$(EVENT)init_struct_ev.c	$(EVENT)move_w_s.c	$(EVENT)move_a_d.c	 \
 
 #---------------Display----------------#
 SRCS +=	$(DISP)init_world.c			$(DISP)print_img.c	$(DISP)display.c	 \
-		$(DISP)put_mini_map.c		$(DISP)set_images.c	$(DISP)print_weap.c
+		$(DISP)put_mini_map.c		$(DISP)set_images.c	$(DISP)print_weap.c	 \
+		$(DISP)print_lifbar.c		$(DISP)print_go.c	$(DISP)win_lose.c
 
 #---------------Save_BMP---------------#
 SRCS += $(SAVE)save_bmp.c
@@ -115,8 +116,8 @@ $(OBJS) : %.o: %.c $(HEADER)
 	printf "$(CYAN).$(NC)"
 
 $(NAME) : echoCL $(OBJS) echoOK echoCS
-	$(CC) -O3 $(CFLAGS) -flto -march=native -o $@ $(OBJS) $(OBJLIB) -L ./ -lmlx
-	# $(CC) $(CFLAGS) -o $@ $(OBJS) $(OBJLIB) -g3 -fsanitize=address -L ./ -lmlx
+	# $(CC) -O3 $(CFLAGS) -flto -march=native -o $@ $(OBJS) $(OBJLIB) -L ./ -lmlx
+	$(CC) $(CFLAGS) -o $@ $(OBJS) $(OBJLIB) -g3 -fsanitize=address -L ./ -lmlx
 
 
 complib :
