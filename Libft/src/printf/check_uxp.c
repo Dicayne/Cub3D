@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/15 20:09:09 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/01/09 23:26:26 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/03/12 23:07:26 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,7 @@ static void		check_uxp2(t_flags *flg, unsigned int nbr, int size)
 	}
 	else if (flg->field > 0 && flg->prec == 0)
 	{
-		if (nbr < 0)
-			flg->field = flg->field - size;
-		else if (flg->field <= size && nbr != 0)
+		if (flg->field <= size && nbr != 0)
 			flg->field = 0;
 		else if (flg->field > size && nbr != 0)
 			flg->field = flg->field - size;
