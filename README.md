@@ -14,4 +14,4 @@ Press t: turn dark-mode on \
 Press Space: Fire with weapon on invisible ennemies.(SPAM IT) \
 Press up or down: Change move speed \
 Press left or right: Rotate the camera \
-Press W,S,A,D: Move the player \
+Press W,S,A,D: Move the player 
