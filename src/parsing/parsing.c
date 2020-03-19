@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 12:10:14 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/03/12 13:48:57 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/03/17 14:49:37 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,13 +109,14 @@ int			parsing_fd(t_path *pars, t_map *map, char *fdm)
 	while (ret == 1)
 	{
 		ret = get_next_line(fd, &str);
-		if (ret == -1)
+		if (ret == -1 || ret == 0)
 			break ;
 		split = ft_split(str, ' ');
 		ret = pars_line(split, pars);
 		if (ret != 2)
 			free(str);
 	}
+	ret == 0 ? ret = -1 : ret;
 	ret == -1 ? pars->error = ft_strdup("Elements ERROR\n") : pars->error;
 	ret == 2 ? ret = pars_map(map, fd, str, pars) : ret;
 	return (ret);

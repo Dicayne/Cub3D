@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 16:14:19 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/03/12 18:29:23 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/03/19 20:26:17 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ static void	set_images2(t_cub3d *cub)
 
 void		set_images(t_cub3d *cub)
 {
-
+	cub->tex.weap.path = NULL;
 	if (get_img_info(
 				&cub->tex.tex_no, cub->map.mlx_ptr, cub->pars.pars_no) == -1)
 		close_prog(cub);
