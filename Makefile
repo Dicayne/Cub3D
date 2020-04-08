@@ -6,7 +6,7 @@
 #    By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/05 18:22:15 by vmoreau           #+#    #+#              #
-#    Updated: 2020/03/12 18:07:38 by vmoreau          ###   ########.fr        #
+#    Updated: 2020/04/08 18:41:13 by vmoreau          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,10 +26,10 @@ PURPLE = \033[35m
 CYAN = \033[1;36m
 WHITE = \033[0;37m
 
-####################################SOURCES####################################
+####################################NATIVE#####################################
 
 #-----------------Main-----------------#
-SRCS +=	src/main.c
+SRCS +=	src/native/main.c
 
 #---------------Parsing----------------#
 SRCS +=	$(PARS)init_struct_pars.c	$(PARS)parsing.c	$(PARS)parsing_map.c \
@@ -39,13 +39,11 @@ SRCS +=	$(PARS)init_struct_pars.c	$(PARS)parsing.c	$(PARS)parsing_map.c \
 #----------------Event-----------------#
 SRCS +=	$(EVENT)init_struct_ev.c	$(EVENT)move_w_s.c	$(EVENT)move_a_d.c	 \
 		$(EVENT)rotate_g_dr.c		$(EVENT)refresh.c	$(EVENT)event.c		 \
-		$(EVENT)hook.c				$(EVENT)utils.c
+		$(EVENT)hook.c
 
 #---------------Display----------------#
 SRCS +=	$(DISP)init_world.c			$(DISP)print_img.c	$(DISP)display.c	 \
-		$(DISP)put_mini_map.c		$(DISP)set_images.c	$(DISP)print_weap.c	 \
-		$(DISP)print_lifbar.c		$(DISP)print_go.c	$(DISP)win_lose.c
-
+		$(DISP)set_images.c
 #---------------Save_BMP---------------#
 SRCS += $(SAVE)save_bmp.c
 
@@ -53,50 +51,54 @@ SRCS += $(SAVE)save_bmp.c
 SRCS +=	$(RAY)init_struct_ray.c		$(RAY)ray_cast.c	$(RAY)cub3d.c		 \
 		$(RAY)sprit_cast.c			$(RAY)sprit_cast2.c
 
+#####################################BONUS#####################################
+
+#-----------------Main-----------------#
+BONU +=	src/bonus/main.c
+
+#---------------Parsing----------------#
+BONU +=	$(PARSB)init_struct_pars.c	$(PARSB)parsing.c	$(PARSB)parsing_map.c \
+		$(PARSB)utils_parsing.c		$(PARSB)check_map.c	$(PARSB)check_map2.c  \
+		$(PARSB)check_sprite.c
+
+#----------------Event-----------------#
+BONU +=	$(EVENTB)init_struct_ev.c	$(EVENTB)move_w_s.c	$(EVENTB)move_a_d.c	 \
+		$(EVENTB)rotate_g_dr.c		$(EVENTB)refresh.c	$(EVENTB)event.c	 \
+		$(EVENTB)hook.c				$(EVENTB)utils.c
+
+#---------------Display----------------#
+BONU +=	$(DISPB)init_world.c		$(DISPB)print_img.c	$(DISPB)display.c	 \
+		$(DISPB)put_mini_map.c		$(DISPB)print_go.c	$(DISPB)set_images.c \
+		$(DISPB)print_lifbar.c		$(DISPB)win_lose.c	$(DISPB)print_weap.c
+
+#---------------Save_BMP---------------#
+BONU += $(SAVEB)save_bmp.c
+
+#---------------Ray_cast---------------#
+BONU +=	$(RAYB)init_struct_ray.c	$(RAYB)ray_cast.c	$(RAYB)cub3d.c		 \
+		$(RAYB)sprit_cast.c			$(RAYB)sprit_cast2.c
+
 #####################################PARTH#####################################
 
-PARS	= src/parsing/
-DISP	= src/game/display/
-EVENT	= src/game/event/
-RAY		= src/game/ray_cast/
-SAVE	= src/game/bmp_save/
+PARS	= src/native/parsing/
+DISP	= src/native/game/display/
+EVENT	= src/native/game/event/
+RAY		= src/native/game/ray_cast/
+SAVE	= src/native/game/bmp_save/
 
+PARSB	= src/bonus/parsing/
+DISPB	= src/bonus/game/display/
+EVENTB	= src/bonus/game/event/
+RAYB	= src/bonus/game/ray_cast/
+SAVEB	= src/bonus/game/bmp_save/
 #####################################BASIC#####################################
 
 OBJS = $(SRCS:.c=.o)
+BONUS = $(BONU:.c=.o)
 INCL = header/
 HEADER = $(INCL)cub3D.h
 CC = clang
-CFLAGS = -Wall -Wextra
-ifeq ($(d), 0)
-	CFLAGS += -g3
-else ifeq ($(d), 1)
-	CFLAGS += -g3
-	CFLAGS += -fsanitize=address,undefined
-else ifeq ($(d), 2)
-	CFLAGS += -g3
-	CFLAGS += -fsanitize=address,undefined
-	CFLAGS += -ansi
-	CFLAGS += -pedantic
-else ifeq ($(d), 3)
-	CFLAGS += -g3
-	CFLAGS += -fsanitize=address,undefined
-	CFLAGS += -ansi
-	CFLAGS += -pedantic
-	CFLAGS += -Wpadded
-else ifeq ($(d), 4)
-	CFLAGS += -g3
-	CFLAGS += -fsanitize=address,undefined
-	CFLAGS += -ansi
-	CFLAGS += -pedantic
-	CFLAGS += -Wpadded
-	CFLAGS += -Weverything
-endif
-ifeq ($(err), no)
-	CFLAGS += -g3
-else
-	CFLAGS += -Werror
-endif
+CFLAGS = -Wall -Wextra -Werror
 
 #####################################LIBFT#####################################
 
@@ -109,22 +111,29 @@ MLX = minilibx_mms_20191207_beta/
 OBJMLX = $(MLX)*.o
 
 #####################################RULES#####################################
-all : complib compmlx $(NAME)
+all : $(NAME)
 
 $(OBJS) : %.o: %.c $(HEADER)
 	$(CC) $(CFLAGS) -I $(INCL) -c $< -o $@
 	printf "$(CYAN).$(NC)"
 
-$(NAME) : echoCL $(OBJS) echoOK echoCS
-	# $(CC) -O3 $(CFLAGS) -flto -march=native -o $@ $(OBJS) $(OBJLIB) -L ./ -lmlx
-	$(CC) $(CFLAGS) -o $@ $(OBJS) $(OBJLIB) -g3 -fsanitize=address -L ./ -lmlx
+$(BONUS) : %.o: %.c $(HEADER)
+	$(CC) $(CFLAGS) -I $(INCL) -c $< -o $@
+	printf "$(CYAN).$(NC)"
 
+$(NAME) : complib compmlx echoCL $(OBJS) echoOK echoCS
+	$(CC) -O3 $(CFLAGS) -flto -march=native -o $@ $(OBJS) $(OBJLIB) -L ./ -lmlx
+	# $(CC) $(CFLAGS) -o $@ $(OBJS) $(OBJLIB) -g3 -fsanitize=address -L ./ -lmlx
+
+bonus : complib compmlx echoCL $(BONUS) echoOK echoCS
+	$(CC) -O3 $(CFLAGS) -flto -march=native -o cub3D $(BONUS) $(OBJLIB) -L ./ -lmlx
+	# $(CC) $(CFLAGS) -o cub3D $(BONUS) $(OBJLIB) -g3 -fsanitize=address -L ./ -lmlx
 
 complib :
-	$(MAKE) -C $(LIB) all
+	$(MAKE) -C $(LIB)
 
 compmlx :
-	$(MAKE) -C $(MLX) all
+	$(MAKE) -C $(MLX)
 
 cleanlibft :
 	$(MAKE) -C $(LIB) clean
@@ -139,10 +148,10 @@ fcleanmlx :
 	$(MAKE) -C $(MLX) fclean
 
 cleancub : echoCLEAN
-	$(RM) $(OBJS)
+	$(RM) $(OBJS) $(BONUS)
 
 clean : echoCLEAN cleanlibft cleanmlx
-	$(RM) $(OBJS)
+	$(RM) $(OBJS) $(BONUS)
 
 fclean : clean echoFCLEAN fcleanlibft fcleanmlx
 	$(RM) $(NAME)

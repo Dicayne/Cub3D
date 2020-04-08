@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 17:13:04 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/03/12 18:20:00 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/04/08 15:45:35 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int				check_map(t_map *map, t_path *pars);
 int				check_closed_map(t_map *map, int y, int x);
 void			init_struct_pars(t_path *pars, t_map *map);
 t_sp			*fill_sprit(t_map *map, int nb_sprit);
+void			set_ret_error(int* ret, t_path *pars);
 /*
 ** -----------------------GAME----------------------
 ** RAY_CAST

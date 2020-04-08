@@ -6,7 +6,7 @@
 #    By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/05 15:18:39 by vmoreau           #+#    #+#              #
-#    Updated: 2020/03/03 14:57:59 by vmoreau          ###   ########.fr        #
+#    Updated: 2020/04/08 18:23:44 by vmoreau          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -80,37 +80,7 @@ SRCS +=	$(PTF)ft_printf.c		$(PTF)check_flags.c	$(PTF)find_size.c	\
 
 ####################################BASIC######################################
 
-CFLAGS = -Wall -Wextra
-ifeq ($(d), 0)
-	CFLAGS += -g3
-else ifeq ($(d), 1) 
-	CFLAGS += -g3
-	CFLAGS += -fsanitize=address,undefined
-else ifeq ($(d), 2) 
-	CFLAGS += -g3
-	CFLAGS += -fsanitize=address,undefined
-	CFLAGS += -ansi
-	CFLAGS += -pedantic
-else ifeq ($(d), 3) 
-	CFLAGS += -g3
-	CFLAGS += -fsanitize=address,undefined
-	CFLAGS += -ansi
-	CFLAGS += -pedantic
-	CFLAGS += -Wpadded
-else ifeq ($(d), 4) 
-	CFLAGS += -g3
-	CFLAGS += -fsanitize=address,undefined
-	CFLAGS += -ansi
-	CFLAGS += -pedantic
-	CFLAGS += -Wpadded
-	CFLAGS += -Weverything
-endif
-ifeq ($(err), no)
-	CFLAGS += -g3
-else
-	CFLAGS += -Werror
-endif
-	
+CFLAGS = -Wall -Wextra -Werror
 
 CC = clang
 
@@ -120,8 +90,6 @@ HEADER = $(INC)libft.h
 
 OBJ = $(SRCS:.c=.o)
 
-OBJBO = $(SRCSBO:.c=.o)
-
 #####################################RULE######################################
 
 all : $(NAME)
@@ -129,10 +97,10 @@ all : $(NAME)
 $(NAME) : echoCL $(OBJ) echoOK echoCS echoAR
 	ar rcs $@ $(OBJ)
 
-$(OBJ): %.o: %.c $(HEADER) Makefile
-	$(CC) $(CFLAGS) -I$(INC) -c $< -o $@
+$(OBJ) : %.o: %.c $(HEADER)
+	$(CC) $(CFLAGS) -I $(INC) -c $< -o $@
 	printf "$(CYAN)."
-	
+
 clean :	echoCLEAN
 	$(RM) $(OBJ)
 
