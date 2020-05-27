@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 17:13:04 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/04/08 15:45:35 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/05/27 18:07:14 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <math.h>
-# include "../minilibx_mms_20191207_beta/mlx.h"
+# include "../minilibx_mms_20200219/mlx.h"
 # include "../Libft/header/libft.h"
 # include "color.h"
 # include "struct.h"

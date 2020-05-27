@@ -13,38 +13,36 @@ CYAN = \033[1;36m
 WHITE = \033[0;37m
 
 MODULE_SRC= mlx_image.swift mlx_window.swift mlx_init.swift
-MODULE_OBJ= $(MODULE_SRC:.swift=.swiftmodule)
+MODULE_OBJ=$(MODULE_SRC:.swift=.swiftmodule)
 
 SRC= interface.swift $(MODULE_SRC)
-OBJ= $(SRC:.swift=.o)
+OBJ=$(SRC:.swift=.o)
 
 C_SRC= mlx_xpm.c mlx_png.c mlx_string_put.c
-C_OBJ= $(C_SRC:.c=.o)
+C_OBJ=$(C_SRC:.c=.o)
+CFLAGS=-O3
 
 NAME=libmlx.dylib
 
 INC=-I.
+#OPTI=-Ounchecked
 
 all: $(NAME)
 
 $(NAME): echoCL $(MODULE_OBJ) $(OBJ) $(C_OBJ) echoOK echoCS
-	swiftc $(INC) -o $(NAME) -emit-library $(OBJ) $(C_OBJ) -lz
+	swiftc $(OPTI) $(INC) -o $(NAME) -emit-library $(OBJ) $(C_OBJ) -lz
 	mv $(NAME) ../
 
 %.o: %.swift
-	swiftc $(INC) -parse-as-library -c $< -o $@
+	swiftc $(OPTI) $(INC) -parse-as-library -c $< -o $@
 	printf "$(CYAN)."
 
 %.swiftmodule: %.swift
-	swiftc $(INC) -parse-as-library -c $< -o $@ -emit-module -module-name $(patsubst %.swift,%,$<) -module-link-name $(patsubst %.swift,%,$<)
-	printf "$(CYAN)."
-
-$(C_OBJ) : %.o: %.c
-	cc -c $< -o $@
+	swiftc $(OPTI) $(INC) -parse-as-library -c $< -o $@ -emit-module -module-name $(patsubst %.swift,%,$<) -module-link-name $(patsubst %.swift,%,$<)
 	printf "$(CYAN)."
 
 clean:
-	rm -f $(OBJ) $(MODULE_OBJ) $(C_OBJ) *.swiftdoc *~
+	rm -f $(NAME) $(OBJ) $(MODULE_OBJ) $(C_OBJ) *.swiftdoc *~
 
 fclean: clean
 	rm -f ../$(NAME)

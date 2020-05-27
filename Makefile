@@ -6,7 +6,7 @@
 #    By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/05 18:22:15 by vmoreau           #+#    #+#              #
-#    Updated: 2020/04/08 18:41:13 by vmoreau          ###   ########.fr        #
+#    Updated: 2020/05/27 18:01:08 by vmoreau          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -107,7 +107,7 @@ OBJLIB = $(LIB)src/*/*.o
 
 ####################################MINILIBX###################################
 
-MLX = minilibx_mms_20191207_beta/
+MLX = minilibx_mms_20200219/
 OBJMLX = $(MLX)*.o
 
 #####################################RULES#####################################
@@ -123,7 +123,7 @@ $(BONUS) : %.o: %.c $(HEADER)
 
 $(NAME) : complib compmlx echoCL $(OBJS) echoOK echoCS
 	$(CC) -O3 $(CFLAGS) -flto -march=native -o $@ $(OBJS) $(OBJLIB) -L ./ -lmlx
-	# $(CC) $(CFLAGS) -o $@ $(OBJS) $(OBJLIB) -g3 -fsanitize=address -L ./ -lmlx
+	#$(CC) $(CFLAGS) -o $@ $(OBJS) $(OBJLIB) -g3 -fsanitize=address -L ./ -lmlx
 
 bonus : complib compmlx echoCL $(BONUS) echoOK echoCS
 	$(CC) -O3 $(CFLAGS) -flto -march=native -o cub3D $(BONUS) $(OBJLIB) -L ./ -lmlx

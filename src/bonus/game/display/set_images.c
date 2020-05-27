@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 16:14:19 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/04/08 16:45:19 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/05/27 17:49:31 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int			get_img_info(t_image *img, void *mlx_ptr, char *path_tex)
 	else
 	{
 		ft_printf("%sError\n", RED);
-		ft_printf("%sTexture Error ==> %s%s%s\n", YELLOW, CYAN, path_tex);
+		ft_printf("%sTexture Error ==> %s%s%s\n", YELLOW, CYAN, path_tex, NC);
 		return (-1);
 	}
 }
