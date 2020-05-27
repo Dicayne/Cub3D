@@ -6,13 +6,13 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/09 11:04:00 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/04/08 16:46:39 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/05/27 18:57:45 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../../header/cub3d.h"
 
-void	find_color_sp(t_cub3d *cub, double *wdst, t_sprit *sp, int d)
+void			find_color_sp(t_cub3d *cub, double *wdst, t_sprit *sp, int d)
 {
 	sp->tex.y_i = d * cub->tex.tex_s.img_h / sp->sp_size.y_i / 256;
 	sp->color = cub->tex.tex_s.iadr
@@ -21,7 +21,7 @@ void	find_color_sp(t_cub3d *cub, double *wdst, t_sprit *sp, int d)
 		sp->color = darkness_mode(sp->color, wdst[sp->draw_start.x_i]);
 }
 
-void	find_color_goal(t_cub3d *cub, double *wdst, t_sprit *sp, int d)
+void			find_color_goal(t_cub3d *cub, double *wdst, t_sprit *sp, int d)
 {
 	sp->tex.y_i = d * cub->tex.goal.img_h / sp->sp_size.y_i / 256;
 	sp->color = cub->tex.goal.iadr
@@ -30,7 +30,7 @@ void	find_color_goal(t_cub3d *cub, double *wdst, t_sprit *sp, int d)
 		sp->color = darkness_mode(sp->color, wdst[sp->draw_start.x_i]);
 }
 
-static void	sort_sprites(int *ord, double *dist, int nb_sp)
+static void		sort_sprites(int *ord, double *dist, int nb_sp)
 {
 	int		i;
 	int		tmp;
@@ -53,7 +53,7 @@ static void	sort_sprites(int *ord, double *dist, int nb_sp)
 	}
 }
 
-void		find_sp_dst(t_cub3d *cub, int *ord, double *dst)
+void			find_sp_dst(t_cub3d *cub, int *ord, double *dst)
 {
 	int i;
 

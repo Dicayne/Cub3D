@@ -6,13 +6,13 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/08 11:43:08 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/04/08 16:47:33 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/05/27 19:00:50 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../header/cub3d.h"
 
-static int	check_value(t_map *map, int y, int x)
+static int		check_value(t_map *map, int y, int x)
 {
 	map->nb_sprit = 0;
 	map->nb_goal = 0;
@@ -36,11 +36,11 @@ static int	check_value(t_map *map, int y, int x)
 		y++;
 	}
 	if (map->nb_goal > 0)
-			map->nb_goal_start = 1;
+		map->nb_goal_start = 1;
 	return (0);
 }
 
-static int	check_pos(t_map *map, int y, int x)
+static int		check_pos(t_map *map, int y, int x)
 {
 	while (y < map->y)
 	{
@@ -67,7 +67,7 @@ static int	check_pos(t_map *map, int y, int x)
 	return (0);
 }
 
-static void	from_8_to_1(t_map *map)
+static void		from_8_to_1(t_map *map)
 {
 	int y;
 	int x;
@@ -86,7 +86,7 @@ static void	from_8_to_1(t_map *map)
 	}
 }
 
-int			check_map(t_map *map, t_path *pars)
+int				check_map(t_map *map, t_path *pars)
 {
 	int x;
 	int y;

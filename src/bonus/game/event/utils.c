@@ -6,11 +6,25 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 16:21:48 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/04/08 16:46:17 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/05/27 18:51:57 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../../header/cub3d.h"
+
+void		find_goal(t_cub3d *cub, double spd, char id)
+{
+	cub->map.nb_sprit--;
+	cub->map.nb_goal--;
+	if (id == 'w')
+		cub->map.map[(int)(cub->map.pos_y + (cub->cast.dir.y_f * spd))]
+					[(int)(cub->map.pos_x + (cub->cast.dir.x_f * spd))] = 0;
+	else if (id == 's')
+		cub->map.map[(int)(cub->map.pos_y - (cub->cast.dir.y_f * spd))]
+					[(int)(cub->map.pos_x - (cub->cast.dir.x_f * spd))] = 0;
+	free(cub->map.sprit);
+	cub->map.sprit = fill_sprit(&cub->map, cub->map.nb_sprit);
+}
 
 static int	check_pos(int x, int y, t_cub3d *cub)
 {

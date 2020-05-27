@@ -6,7 +6,7 @@
 #    By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/05 18:22:15 by vmoreau           #+#    #+#              #
-#    Updated: 2020/05/27 18:21:28 by vmoreau          ###   ########.fr        #
+#    Updated: 2020/05/27 19:12:42 by vmoreau          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -126,7 +126,7 @@ $(NAME) : complib compmlx echoCL $(OBJS) echoOK echoCS
 	#$(CC) $(CFLAGS) -o $@ $(OBJS) $(OBJLIB) -g3 -fsanitize=address -L ./ -lmlx
 
 bonus : complib compmlx echoCL $(BONUS) echoOK echoCS
-	$(CC) -O3 $(CFLAGS) -flto -march=native -o cub3D $(BONUS) $(OBJLIB) -L ./ -lmlx
+	$(CC) -O3 $(CFLAGS) -flto -march=native -o Cub3D $(BONUS) $(OBJLIB) -L ./ -lmlx
 	# $(CC) $(CFLAGS) -o cub3D $(BONUS) $(OBJLIB) -g3 -fsanitize=address -L ./ -lmlx
 
 complib :

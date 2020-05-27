@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/12 13:55:46 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/04/08 16:44:59 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/05/27 18:40:34 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,11 @@ static void		print(t_image *g_o, t_cub3d *cub, int bool)
 			if (bool == 0)
 				color = mlx_get_color_value(cub->map.mlx_ptr,
 					cub->tex.g_o.tiadr[(cub->tex.g_o.img_h * y) / g_o->img_h]
-										[(cub->tex.g_o.img_w * x) / g_o->img_w]);
+									[(cub->tex.g_o.img_w * x) / g_o->img_w]);
 			else if (bool == 1)
 				color = mlx_get_color_value(cub->map.mlx_ptr,
 					cub->tex.y_w.tiadr[(cub->tex.y_w.img_h * y) / g_o->img_h]
-										[(cub->tex.y_w.img_w * x) / g_o->img_w]);
+									[(cub->tex.y_w.img_w * x) / g_o->img_w]);
 			my_mlx_pixel_put(g_o, x, y, color);
 			x++;
 		}
@@ -48,7 +48,7 @@ static void		print(t_image *g_o, t_cub3d *cub, int bool)
 	}
 }
 
-void		print_over_win(t_cub3d *cub, int bool)
+void			print_over_win(t_cub3d *cub, int bool)
 {
 	t_image		g_o;
 
@@ -56,7 +56,7 @@ void		print_over_win(t_cub3d *cub, int bool)
 	print(&g_o, cub, bool);
 	mlx_put_image_to_window(cub->map.mlx_ptr, cub->map.mlx_win,
 					g_o.img, cub->pars.scrwidth / 2 - (g_o.img_w / 2),
-					 cub->pars.scrheight / 2 - (g_o.img_h / 2));
+					cub->pars.scrheight / 2 - (g_o.img_h / 2));
 	if (bool == 0)
 		cub->tex.g_o.g_o = 0;
 	else if (bool == 1)

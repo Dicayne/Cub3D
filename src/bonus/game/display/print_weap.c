@@ -6,13 +6,13 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 19:55:26 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/04/08 16:45:10 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/05/27 18:41:30 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../../header/cub3d.h"
 
-static void	init_weap(t_cub3d *cub)
+static void		init_weap(t_cub3d *cub)
 {
 	free(cub->tex.weap.path);
 	free_tab_int(&cub->tex.weap);
@@ -56,7 +56,7 @@ static void		print(t_image *weap, t_cub3d *cub)
 	}
 }
 
-void		print_weap(t_cub3d *cub)
+void			print_weap(t_cub3d *cub)
 {
 	t_image weap;
 

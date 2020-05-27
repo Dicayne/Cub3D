@@ -6,13 +6,13 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/12 11:45:48 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/04/08 16:45:06 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/05/27 18:41:16 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../../header/cub3d.h"
 
-static void	init_lb(t_cub3d *cub)
+static void		init_lb(t_cub3d *cub)
 {
 	free(cub->tex.lifbar.path);
 	free_tab_int(&cub->tex.lifbar);
@@ -64,7 +64,7 @@ static void		print(t_image *lb, t_cub3d *cub)
 	}
 }
 
-void		print_lifebarre(t_cub3d *cub)
+void			print_lifebarre(t_cub3d *cub)
 {
 	t_image		lb;
 	static int	hp_b;

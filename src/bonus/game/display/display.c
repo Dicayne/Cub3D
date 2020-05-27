@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 13:34:12 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/04/08 16:44:51 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/05/27 18:39:59 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,12 @@ void		my_mlx_pixel_put(t_image *img, int x, int y, int color)
 	*(int*)dst = color;
 }
 
-static void check_endgame(t_cub3d *cub)
+static void	check_endgame(t_cub3d *cub)
 {
 	if (cub->tex.g_o.g_o == 0)
-			game_over(cub);
+		game_over(cub);
 	if (cub->tex.y_w.g_o == 0)
-			you_win(cub);
+		you_win(cub);
 }
 
 static void	print_hud(t_cub3d *cub)

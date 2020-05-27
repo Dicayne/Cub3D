@@ -6,40 +6,13 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 18:12:15 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/04/08 16:47:55 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/05/27 19:05:55 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../header/cub3d.h"
 
-/*
-** A DEGAGER
-*/
-
-void	print_int(t_map *coor)
-{
-	int y;
-	int x;
-
-	y = 0;
-	while (y < coor->y)
-	{
-		x = 0;
-		while (x < coor->x)
-		{
-			ft_putnbr(coor->map[y][x]);
-			x++;
-		}
-		ft_putchar('\n');
-		y++;
-	}
-}
-
-/*
-** A DEGAGER
-*/
-
-int		strlen_c(char *str, char c, char d)
+int				strlen_c(char *str, char c, char d)
 {
 	int i;
 	int ret;
@@ -54,7 +27,7 @@ int		strlen_c(char *str, char c, char d)
 	return (ret);
 }
 
-void	fill_8(int **map, int x, int y, int max)
+void			fill_8(int **map, int x, int y, int max)
 {
 	while (x < max)
 	{
@@ -63,7 +36,7 @@ void	fill_8(int **map, int x, int y, int max)
 	}
 }
 
-void	from_0_to_8(t_map *map, int y, int x)
+void			from_0_to_8(t_map *map, int y, int x)
 {
 	while (y < map->y)
 	{
@@ -83,7 +56,7 @@ void	from_0_to_8(t_map *map, int y, int x)
 	}
 }
 
-int		strisnum(char *str)
+int				strisnum(char *str)
 {
 	int i;
 
@@ -98,7 +71,7 @@ int		strisnum(char *str)
 	return (1);
 }
 
-void		set_ret_error(int* ret, t_path *pars)
+void			set_ret_error(int *ret, t_path *pars)
 {
 	*ret == 0 ? *ret = -1 : *ret;
 	*ret == -2 ? pars->error = ft_strdup("Elements ERROR\n") : pars->error;

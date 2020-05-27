@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 17:13:04 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/05/27 18:07:14 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/05/27 18:50:37 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ void			free_struct(t_path *pars, t_map *map);
 void			free_img(t_image *img);
 void			free_tab_int(t_image *img);
 int				darkness_mode(int color, double wall_dist);
+void			find_goal(t_cub3d *cub, double spd, char id);
 /*
 ** A DEGAGER
 */

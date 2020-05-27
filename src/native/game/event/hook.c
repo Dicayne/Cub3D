@@ -6,7 +6,7 @@
 /*   By: vmoreau <vmoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 15:27:12 by vmoreau           #+#    #+#             */
-/*   Updated: 2020/04/08 17:23:46 by vmoreau          ###   ########.fr       */
+/*   Updated: 2020/05/27 19:13:44 by vmoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,3 @@ int			key_hook(int keycode, t_cub3d *cub)
 		save(cub);
 	return (0);
 }
-
